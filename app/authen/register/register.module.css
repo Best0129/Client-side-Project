@@ -61,9 +61,15 @@
     gap: 25px;
 }
 
+.card form {
+    width: 100%;
+    margin-left: 230px;
+}
+
 .inputBox {
     position: relative;
     width: 70%;
+    margin-bottom: 25px;
 }
 
 .inputBox input {
