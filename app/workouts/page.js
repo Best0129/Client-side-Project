@@ -74,7 +74,7 @@ export default function Home() {
 
     const timer = setTimeout(() => {
       setLoader(false);
-    }, 100);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);

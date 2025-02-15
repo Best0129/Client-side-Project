@@ -1,6 +1,12 @@
+.load {
+  background-color: rgba(13, 13, 13);
+  height: 100dvh;
+  width: 100%;
+}
+
 .loader {
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -9,9 +15,9 @@
 .l,.l:nth-child(9) {
   margin: 0.15em;
   border-radius: 5em;
-  width: 0.4em;
+  width: 0.8em;
   background-color: #f12711;
-  height: 3em;
+  height: 6em;
   box-shadow: 1px 1px 4px black;
   animation: load_5186 cubic-bezier(.41,.44,.72,.69) 2s infinite;
 }
