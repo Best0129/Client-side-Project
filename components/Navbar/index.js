@@ -1,15 +1,29 @@
 "use client"
 import styles from './Navbar.module.css';
 import Link from 'next/link';
-import { FaDumbbell, FaCalendarAlt, FaUsers, FaUtensils, FaUserPlus } from 'react-icons/fa'; // Import icons
+import { FaDumbbell, FaCalendarAlt, FaUsers, FaUtensils, FaUser, FaUserPlus } from 'react-icons/fa'; // Import icons
 import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const router = useRouter();
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const handleClick = () => {
+    if (username) {
+      router.push('/profile');
+    } else {
       router.push('/authen/login');
+    }
   };
+
   return (
     <nav className={styles.navbar} id='nav'>
       <div className={styles.logo}>
@@ -38,7 +52,15 @@ export default function Navbar() {
         </li>
         <li>
           <button onClick={handleClick} className={styles.ctaButton}>
-            <FaUserPlus className={styles.navIcon} /> Join Now {/* Icon for Join Now */}
+            {username ? (
+              <span>
+                <FaUser className={styles.navIcon} /> {username}
+              </span>
+            ) : (
+              <span>
+                <FaUserPlus className={styles.navIcon} /> Join Now
+              </span>
+            )}
           </button>
         </li>
       </ul>

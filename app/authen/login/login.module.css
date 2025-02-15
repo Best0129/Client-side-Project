@@ -60,14 +60,21 @@
     gap: 25px;
 }
 
+.card form {
+    width: 100%;
+    margin-left: 230px;
+}
+
 .inputBox {
     position: relative;
     width: 70%;
+    margin-bottom: 25px;
 }
 
 .box {
     position: relative;
     display: flex;
+    margin-bottom: 25px;
     gap: 240px;
 }
 
@@ -195,7 +202,8 @@
 
 .sign {
     color: var(--background);
-    margin-top: 215px;
+    position: absolute;
+    bottom: 50px;
 }
 
 .signup {
@@ -231,3 +239,102 @@
     stroke-dasharray: 70.5096664428711 9999999;
     stroke-dashoffset: -262.2723388671875;
 }
+
+.notification {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    isolation: isolate;
+    position: relative;
+    height: 6rem;
+    background: rgb(13, 13, 13);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    overflow: hidden;
+    --gradient: linear-gradient(to bottom, rgb(255, 115, 115), rgb(255, 45, 45), red);
+  }
+  
+  .notification:before {
+    position: absolute;
+    content: "";
+    inset: 0.0625rem;
+    border-radius: 5px;
+    background: rgb(35, 35, 35);
+    z-index: 2
+  }
+  
+  .notification:after {
+    position: absolute;
+    content: "";
+    width: 0.25rem;
+    inset: 0.65rem auto 0.65rem 0.5rem;
+    border-radius: 5px;
+    background: var(--gradient);
+    transition: transform 300ms ease;
+    z-index: 4;
+  }
+  
+  .notification:hover:after {
+    transform: translateX(0.15rem)
+  }
+  
+  .notititle {
+    color: rgb(255, 45, 45);
+    padding: 0.65rem 0.25rem 0.4rem 1.25rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: transform 300ms ease;
+    z-index: 5;
+  }
+  
+  .notification:hover .notititle {
+    transform: translateX(0.15rem)
+  }
+  
+  .notibody {
+    color: rgb(255, 115, 115);
+    padding: 0 1.25rem;
+    transition: transform 300ms ease;
+    z-index: 5;
+  }
+  
+  .notification:hover .notibody {
+    transform: translateX(0.25rem)
+  }
+  
+  .notiglow,
+  .notiborderglow {
+    position: absolute;
+    width: 20rem;
+    height: 20rem;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle closest-side at center, white, transparent);
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+  
+  .notiglow {
+    z-index: 3;
+  }
+  
+  .notiborderglow {
+    z-index: 1;
+  }
+  
+  .notification:hover .notiglow {
+    opacity: 0.1
+  }
+  
+  .notification:hover .notiborderglow {
+    opacity: 0.1
+  }
+  
+  .note {
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 0.9rem;
+    width: 75%;
+  }

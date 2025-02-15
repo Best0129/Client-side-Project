@@ -2,13 +2,42 @@
 import { useState } from 'react';
 import styles from './login.module.css';
 import { Eye, EyeOff } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
+  const [email, setEmail] = useState(''); // State for email
   const [password, setPassword] = useState(''); // State to manage password input
+  const [error, setError] = useState(''); // State for error messages
+
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword); // Toggle the visibility state
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+    
+    if (response.ok) {
+      // Handle successful login (e.g., redirect or show a success message)
+      localStorage.setItem('username', data.user.username);
+      localStorage.setItem('email', data.user.email);
+      router.push('/'); // Redirect to home page
+    } else {
+      const data = await response.json();
+      setError(data.message); // Set error message from the response
+    }
   };
 
   return (
@@ -19,42 +48,59 @@ export default function Login() {
           <div className={styles.card}>
             <h1 className={styles.head}>Welcome Back!</h1>
             <p>The faster you fill up, the faster you get healthier</p>
-            <div className={styles.inputBox}>
-              <input type="email" required="required" />
-              <span className={styles.user}>Email</span>
-            </div>
+            <form onSubmit={handleLogin}>
+              <div className={styles.inputBox}>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)} // Update email state
+                />
+                <span className={styles.user}>Email</span>
+              </div>
 
-            <div className={styles.inputBox}>
-              <input 
-                type={showPassword ? "text" : "password"} // Change input type based on state
-                required="required" 
-                value={password} // Bind the input value to the state
-                onChange={(e) => setPassword(e.target.value)} // Update state on input change
-              />
-              <span>Password</span>
-              {password && ( // Conditionally render the button if password is not empty
-                <button 
-                  type="button" 
-                  onClick={togglePasswordVisibility} 
-                  className={styles.viewPasswordButton} // Add a class for styling
-                >
-                  {showPassword ? <EyeOff/> : <Eye/> } 
-                </button>
-              )}
-            </div>
+              <div className={styles.inputBox}>
+                <input
+                  type={showPassword ? "text" : "password"} // Change input type based on state
+                  required="required"
+                  value={password} // Bind the input value to the state
+                  onChange={(e) => setPassword(e.target.value)} // Update state on input change
+                />
+                <span>Password</span>
+                {password && ( // Conditionally render the button if password is not empty
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className={styles.viewPasswordButton} // Add a class for styling
+                  >
+                    {showPassword ? <EyeOff /> : <Eye />}
+                  </button>
+                )}
 
-            <div className={styles.box}>
-              <label className={styles.contain}>
-                <input type="checkbox" />
-                <svg viewBox="0 0 64 64" height="1em" width="1em">
-                  <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938" className={styles.path}></path>
-                </svg>
-                Remember me
-              </label>
-              <a>Forgot Your Password</a>
-            </div>
+                {error &&
+                  <div className={styles.notification}>
+                    <div className={styles.notiglow}></div>
+                    <div className={styles.notiborderglow}></div>
+                    <div className={styles.notititle}>{error}</div>
+                    <div className={styles.notibody}>Please try again.</div>
+                  </div>}
 
-            <button className={styles.enter}>Sign in</button>
+              </div>
+
+              <div className={styles.box}>
+                <label className={styles.contain}>
+                  <input type="checkbox" />
+                  <svg viewBox="0 0 64 64" height="1em" width="1em">
+                    <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938" className={styles.path}></path>
+                  </svg>
+                  Remember me
+                </label>
+                <a>Forgot Your Password</a>
+              </div>
+
+              <button type="submit" className={styles.enter}>Sign in</button>
+            </form>
+
             <button className={styles.signinGoogle}>
               <svg
                 viewBox="0 0 256 262"
