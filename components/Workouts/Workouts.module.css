@@ -1,0 +1,156 @@
+.container {
+  margin: 0 auto;
+  text-align: center;
+  background: linear-gradient(rgba(13, 13, 13, 0.95), rgba(13, 13, 13, 0.8)), url('/workout.jpg');
+  background-size: cover;
+  background-position: center;
+  font-family: "Anton SC", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--white);
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: start;
+  padding: 50px 0 0 100px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+}
+
+.accent {
+  color: var(--dynamic-orange);
+}
+
+.grid {
+  padding: 50px 100px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+  background-color: rgba(13, 13, 13, 0.6);
+  padding: 30px 0;
+}
+
+.card:first-child {
+  border-right: 1px solid var(--dynamic-orange);
+  border-bottom: 1px solid var(--dynamic-orange);
+}
+
+.card:nth-child(2) {
+  border-left: 1px solid var(--dynamic-orange);
+  border-right: 1px solid var(--dynamic-orange);
+  border-bottom: 1px solid var(--dynamic-orange);
+}
+
+.card:nth-child(3) {
+  border-left: 1px solid var(--dynamic-orange);
+  border-bottom: 1px solid var(--dynamic-orange);
+}
+
+.card:nth-child(4) {
+  border-right: 1px solid var(--dynamic-orange);
+  border-top: 1px solid var(--dynamic-orange);
+}
+
+.card:nth-child(5) {
+  border-left: 1px solid var(--dynamic-orange);
+  border-right: 1px solid var(--dynamic-orange);
+  border-top: 1px solid var(--dynamic-orange);
+}
+
+.card:nth-child(6) {
+  border-left: 1px solid var(--dynamic-orange);
+  border-top: 1px solid var(--dynamic-orange);
+}
+
+.card_content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.icon_wrapper {
+  margin-bottom: 16px;
+}
+
+.icon {
+  color: var(--white);
+}
+
+.card_content h3 {
+  color: var(--white);
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin: 0 0 12px 0;
+}
+
+.card_content p {
+  font-family: "Kanit", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--background);
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.ctaButton {
+  font-family: "Anton SC", serif;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  color: var(--white);
+  border: 1px solid var(--white);
+  min-height: 50px;
+  padding: 10px 20px;
+  font-size: 1.4rem;
+  z-index: 1;
+  position: relative;
+  background-color: transparent;
+  margin-bottom: 50px;
+}
+
+.ctaButton::before {
+  content: "";
+  background-color: var(--white);
+  display: block;
+  width: 45px;
+  height: 2px;
+  margin-right: 20px;
+}
+
+.ctaButton::after {
+  content: "";
+  background-color: var(--white);
+  display: block;
+  width: 0%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  position: absolute;
+  z-index: -1;
+  transition: all 0.3s ease-out;
+}
+
+.ctaButton:hover {
+  color: var(--black);
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+}
+
+.ctaButton:hover::after {
+  width: 100%;
+  transition: all 0.3s ease-out;
+}
+
+.ctaButton:hover::before {
+  background-color: var(--black);
+  transition: all 0.3s ease-out;
+}

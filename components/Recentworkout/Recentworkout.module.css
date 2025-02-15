@@ -1,0 +1,143 @@
+.recentContainer {
+    background: rgb(13, 13, 13);
+    padding: 10px 100px 50px 100px;
+}
+
+.recentContainer h1 {
+    font-family: "Anton SC", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--white);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.accent {
+    color: var(--dynamic-orange);
+}
+
+.image {
+    object-fit: cover;
+    width: 100%;
+    height: 135px;
+    background-image: linear-gradient(45deg, #FF512F 0%, #F09819 100%);
+}
+
+.exerciseGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
+    gap: 30px;
+}
+
+.exerciseCard {
+    border-radius: 8px;
+    background-color: rgb(35, 35, 35);
+    box-shadow: 5px 10px var(--black);
+    transition: 0.4s;
+  }
+  
+  .exerciseCard:hover {
+    box-shadow: 10px 20px var(--black);
+    transform: translate(-5px, -10px);
+  }
+
+.exerciseInfo {
+    font-family: "Kanit", serif;
+    font-weight: 400;
+    font-style: normal;
+    padding: 20px;
+    color: var(--white);
+}
+
+.info {
+    color: var(--background);
+}
+
+.btn {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    float: right;
+}
+
+.btn.learn_more {
+    width: 12rem;
+    height: auto;
+}
+
+.btn.learn_more .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: var(--black);
+    border-radius: 1.625rem;
+}
+
+.btn.learn_more .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+}
+
+.btn.learn_more .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+}
+
+.btn.learn_more .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+}
+
+.btn.learn_more .button_text {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    color: var(--background);
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.btn:hover .circle {
+    width: 100%;
+}
+
+.btn:hover .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem, 0);
+}
+
+.btn:hover .button_text {
+    color: #fff;
+}

@@ -1,0 +1,233 @@
+.loginForm {
+    font-family: "Kanit", serif;
+    font-weight: 400;
+    font-style: normal;
+    background-image: url('/banner.webp');
+    background-size: 150%;
+    background-position: 1900px -50px;
+    height: 100dvh;
+}
+
+.container {
+    height: 99dvh;
+    background: rgb(13, 13, 13);
+    color: var(--white);
+    outline: var(--black);
+    box-shadow: 10px 20px var(--black);
+    z-index: 1;
+    animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 40%;
+        opacity: 1; 
+    }
+}
+
+.container>h1 {
+    font-family: "Anton SC", serif;
+    font-weight: 400;
+    font-style: normal;
+    padding: 30px;
+    color: var(--dynamic-orange);
+}
+
+.container p {
+    color: var(--background);
+    margin-bottom: 10px;
+}
+
+.head {
+    font-family: "Anton SC", serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-top: 100px;
+    letter-spacing: 2px;
+    display: block;
+    font-size: 3rem;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.inputBox {
+    position: relative;
+    width: 70%;
+}
+
+.box {
+    position: relative;
+    display: flex;
+    gap: 240px;
+}
+
+.inputBox input {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: none;
+    color: var(--white);
+    font-size: 1em;
+    background: transparent;
+    border-left: 2px solid var(--white);
+    border-bottom: 2px solid var(--white);
+    transition: 0.1s;
+    border-bottom-left-radius: 8px;
+}
+
+.inputBox span {
+    margin-top: 5px;
+    position: absolute;
+    left: 0;
+    transform: translateY(-4px);
+    margin-left: 10px;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 12px;
+    color: var(--white);
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 3px;
+    border-radius: 8px;
+}
+
+.inputBox input:valid~span,
+.inputBox input:focus~span {
+    transform: translateX(383px) translateY(-15px);
+    font-size: 0.8em;
+    padding: 5px 10px;
+    background: var(--white);
+    letter-spacing: 0.2em;
+    color: var(--black);
+    border: 2px;
+}
+
+.inputBox input:valid,
+.inputBox input:focus {
+    border: 2px solid var(--white);
+    border-radius: 8px;
+}
+
+.viewPasswordButton {
+    position: absolute;
+    background: none;
+    border: none;
+    color: var(--white); 
+    cursor: pointer;
+    font-size: 0.8em;
+    padding: 0 18px;
+    margin-top: 8px;
+    text-transform: uppercase;
+}
+
+.enter {
+    height: 45px;
+    width: 70%;
+    border-radius: 5px;
+    color: var(--white);
+    border: 2px solid var(--white);
+    cursor: pointer;
+    background-color: transparent;
+    transition: 0.5s;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+}
+
+.enter:hover {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.enter span {
+    margin-left: 10px;
+}
+
+.enter:active {
+    transform: scale(0.925);
+}
+
+.signinGoogle {
+    float: right;
+    height: 45px;
+    width: 70%;
+    display: flex;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 5px;
+    border: 2px solid var(--white);
+    gap: 0.75rem;
+    color: var(--white);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0, 0.87, 0.12, 1);
+}
+
+.signinGoogle:hover {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.signinGoogle:active {
+    transform: scale(0.975);
+}
+
+.signinGoogle svg {
+    height: 24px;
+    width: auto;
+    padding-left: 155px;
+}
+
+
+.sign {
+    color: var(--background);
+    margin-top: 215px;
+}
+
+.signup {
+    text-decoration: none;
+    color: var(--white);
+}
+
+.contain {
+    cursor: pointer;
+}
+
+.contain input {
+    display: none;
+}
+
+.contain svg {
+    overflow: visible;
+    margin-right: 10px;
+}
+
+.path {
+    fill: none;
+    stroke: var(--white);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+    stroke-dasharray: 241 9999999;
+    stroke-dashoffset: 0;
+}
+
+.contain input:checked~svg .path {
+    stroke-dasharray: 70.5096664428711 9999999;
+    stroke-dashoffset: -262.2723388671875;
+}

@@ -1,0 +1,216 @@
+.footer {
+  font-family: "Kanit", serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: rgba(35, 35, 35);
+  color: var(--white);
+}
+
+.footer hr {
+  width: calc(100% - 100px - 100px);
+  margin: 0 auto;
+  border: 1px solid var(--dynamic-orange);
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.accent {
+  color: var(--dynamic-orange);
+}
+
+.info {
+  width: 30%;
+  padding: 50px 0 50px 100px;
+}
+
+.informations,
+.quicklinks {
+  width: 20%;
+  padding: 80px 100px 0 100px;
+}
+
+.subscribe {
+  width: 30%;
+  padding: 100px 100px 0 100px;
+}
+
+.info h1 {
+  font-family: "Anton SC", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.info span {
+  color: var(--white);
+}
+
+.info h2,
+.informations h2,
+.quicklinks h2,
+.subscribe h2 {
+  margin-bottom: 10px;
+}
+
+.info h4 {
+  margin-bottom: 25px;
+  color: var(--background);
+}
+
+.info h5>span {
+  color: var(--background);
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+.informations li,
+.quicklinks li {
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.informations a,
+.quicklinks a {
+  text-decoration: none;
+  color: var(--background);
+  transition: 0.3s;
+}
+
+.informations a:hover,
+.quicklinks a:hover {
+  color: var(--white);
+}
+
+.input_box {
+  font-family: "Kanit", serif;
+  font-weight: 400;
+  font-style: normal;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  color: var(--white);
+  width: 100%;
+  background-color: transparent;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--dynamic-orange);
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+.input_box:focus {
+  border-color: var(--dynamic-orange);
+  outline: none;
+}
+
+.input_box:focus+.underline {
+  transform: scaleX(1);
+}
+
+
+.copyright {
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(35, 35, 35);
+  color: var(--white);
+}
+
+.Btn {
+  width: 55px;
+  height: 55px;
+  background: linear-gradient(var(--dynamic-orange), var(--light-orange));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  position: fixed;
+  bottom: 40;
+  right: 40;
+  border: none;
+}
+
+.arrow path {
+  fill: var(--white);
+}
+
+.text {
+  font-size: 1rem;
+  width: 100px;
+  position: absolute;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: -30px;
+  opacity: 0;
+  transition-duration: .7s;
+}
+
+.Btn:hover .text {
+  opacity: 1;
+  transition-duration: .7s;
+}
+
+.Btn:hover .arrow {
+  animation: slide-in-bottom .7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.ctaButton {
+  background-image: linear-gradient(45deg, #FF512F 0%, #F09819 51%, #FF512F 100%)
+}
+
+.ctaButton {
+  text-decoration: none;
+  font-family: "Anton SC", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1rem;
+  margin-top: 20px;
+  padding: 8px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: var(--white);
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  margin-bottom: 50px;
+  width: 30%;
+}
+
+.ctaButton:hover {
+  background-position: right center;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.ctaButton:active {
+  transform: scale(0.95);
+}

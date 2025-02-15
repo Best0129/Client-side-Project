@@ -1,0 +1,115 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 70px;
+  background: rgba(13, 13, 13);
+  position: relative;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo a {
+  font-family: "Anton SC", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--dynamic-orange);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.logo a:hover {
+  color: var(--white);
+}
+
+
+.navItems {
+  font-family: "Anton SC", serif;
+  font-weight: 400;
+  font-style: normal;
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navItems a {
+  text-decoration: none;
+  color: var(--white);
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navItems a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 2px;
+  background-color: var(--dynamic-orange);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.navItems a:hover {
+  color: var(--dynamic-orange);
+}
+
+.navItems a:hover::after {
+  transform: scaleX(1);
+}
+
+.ctaButton {
+  font-family: "Kanit", serif;
+  font-weight: 600;
+  font-style: normal;
+  cursor: pointer;
+  position: relative;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--dynamic-orange);
+  border: 2px solid var(--dynamic-orange);
+  border-radius: 34px;
+  background-color: transparent;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  overflow: hidden;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  border-radius: inherit;
+  scale: 0;
+  z-index: -1;
+  background-color: var(--dynamic-orange);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.ctaButton:hover::before {
+  scale: 3;
+}
+
+.ctaButton:hover {
+  color: var(--white);
+  scale: 1.1;
+  box-shadow: 0 0px 20px var(--light-orange);
+}
+
+.ctaButton:active {
+  scale: 1;
+}
+
+.navIcon {
+  font-size: 1.2rem;
+  margin-right: 5px;
+}

@@ -1,0 +1,122 @@
+.herocontainer {
+  font-family: "Anton SC", serif;
+  font-weight: 400;
+  font-style: normal;
+  height: 100dvh;
+  background: url('/banner.webp');
+  background-size: 150%;
+  background-position: 1900px -115.69px;
+  display: flex;
+  align-items: center;
+  color: var(--white);
+}
+
+.heroContent {
+  width: 50%;
+}
+
+.herocontainer h1 {
+  padding-left: 100px;
+  color: var(--white);
+  font-size: 4.5rem;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.herocontainer p {
+  padding-left: 100px;
+  font-family: "Kanit", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--background);
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 30px;
+  padding-left: 100px;
+  margin-bottom: 40px;
+}
+
+.primaryButton {
+  font-family: "Kanit", serif;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  background-color: var(--dynamic-orange);
+  color: var(--white);
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border: 1px solid var(--light-orange);
+  z-index: 1;
+  position: relative;
+  transition: all 250ms;
+  overflow: hidden;
+}
+
+.primaryButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 8px;
+  background-color: var(--light-orange);
+  z-index: -1;
+  transition: all 250ms
+}
+
+.primaryButton:hover {
+  color: var(--white);
+}
+
+.primaryButton:hover::before {
+  width: 100%;
+}
+
+.secondaryButton {
+  font-family: "Kanit", serif;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  background-color: var(--black);
+  color: var(--white);
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--white);
+  z-index: 1;
+  position: relative;
+  transition: all 250ms;
+  overflow: hidden;
+}
+
+.secondaryButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 8px;
+  background-color: var(--white);
+  z-index: -1;
+  transition: all 250ms
+}
+
+.secondaryButton:hover {
+  color: var(--black);
+}
+
+.secondaryButton:hover::before {
+  width: 100%;
+}
