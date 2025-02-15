@@ -6,7 +6,7 @@ import exercisesData from "@/utils/exercises.json";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-import Loader from '@/components/Loader'; 
+import Loader from '@/components/Loader';
 
 export default function Home() {
   const [exercises, setExercises] = useState([]);
@@ -74,7 +74,7 @@ export default function Home() {
 
     const timer = setTimeout(() => {
       setLoader(false);
-    }, 300);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);
