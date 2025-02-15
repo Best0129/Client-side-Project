@@ -17,7 +17,6 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault(); // Prevent default form submission
 
-    // Send a POST request to the API
     const response = await fetch('/api/register', {
       method: 'POST',
       headers: {
@@ -28,7 +27,7 @@ export default function Register() {
 
     if (response.ok) {
       // Handle successful registration (e.g., redirect or show a success message)
-      console.log('User  registered successfully');
+      console.log('User registered successfully');
     } else {
       const data = await response.json();
       setError(data.message); // Set error message from the response

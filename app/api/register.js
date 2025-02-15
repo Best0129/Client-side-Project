@@ -18,7 +18,7 @@ export default async function handler(req, res) {
         where: { email },
       });
 
-      if (existing(User)) {
+      if (existingUser ) {
         return res.status(400).json({ message: 'User  already exists' });
       }
 
