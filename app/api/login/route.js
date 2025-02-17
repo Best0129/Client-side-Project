@@ -49,7 +49,14 @@ export async function POST(req) {
     }
 
     // Return the user data if the password is valid
-    return new Response(JSON.stringify({ message: 'Logged in successfully', user: { username: user.username, email: user.email } }), {
+    return new Response(JSON.stringify({
+      message: 'Logged in successfully',
+      user: {
+        username: user.username,
+        email: user.email,
+        // Add any other fields you want to return
+      }
+    }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });

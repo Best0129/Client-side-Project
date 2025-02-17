@@ -31,8 +31,7 @@ export default function Login() {
     
     if (response.ok) {
       // Handle successful login (e.g., redirect or show a success message)
-      localStorage.setItem('username', data.user.username);
-      localStorage.setItem('email', data.user.email);
+      localStorage.setItem('user', JSON.stringify(data.user));
       router.push('/'); // Redirect to home page
     } else {
       const data = await response.json();

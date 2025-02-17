@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import styles from './Navbar.module.css';
 import Link from 'next/link';
-import { FaDumbbell, FaCalendarAlt, FaUsers, FaUtensils, FaUser, FaUserPlus } from 'react-icons/fa'; // Import icons
+import { FaDumbbell, FaCalendarAlt, FaUsers, FaUtensils, FaUser , FaUserPlus } from 'react-icons/fa'; // Import icons
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -10,9 +10,10 @@ export default function Navbar() {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
-    if (storedUsername) {
-      setUsername(storedUsername);
+    const storedUser  = localStorage.getItem('user');
+    if (storedUser ) {
+      const user = JSON.parse(storedUser ); // Parse the JSON string
+      setUsername(user.username); // Access the username property
     }
   }, []);
 
@@ -54,7 +55,7 @@ export default function Navbar() {
           <button onClick={handleClick} className={styles.ctaButton}>
             {username ? (
               <span>
-                <FaUser className={styles.navIcon} /> {username}
+                <FaUser  className={styles.navIcon} /> {username}
               </span>
             ) : (
               <span>
