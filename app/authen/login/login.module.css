@@ -15,7 +15,7 @@
     outline: var(--black);
     box-shadow: 10px 20px var(--black);
     z-index: 1;
-    animation: slideIn 0.5s ease forwards;
+    animation: slideIn 0.5s ease-in-out forwards;
 }
 
 @keyframes slideIn {
