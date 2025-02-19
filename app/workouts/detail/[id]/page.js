@@ -2,7 +2,6 @@ import exercisesData from '@/utils/exercises.json';
 import styles from './detail.module.css';
 import * as React from 'react';
 import Navbar from '@/components/Navbar';
-import Loader from '@/components/Loader'; 
 
 const ExerciseDetail = ({ params }) => {
   const { id } = React.use(params); // Get the id from the URL parameters

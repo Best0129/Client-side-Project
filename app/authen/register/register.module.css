@@ -158,42 +158,6 @@
     transform: scale(0.925);
 }
 
-.signinGoogle {
-    float: right;
-    height: 45px;
-    width: 70%;
-    display: flex;
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    text-align: center;
-    vertical-align: middle;
-    align-items: center;
-    border-radius: 5px;
-    border: 2px solid var(--white);
-    gap: 0.75rem;
-    color: var(--white);
-    background-color: transparent;
-    cursor: pointer;
-    transition: all 0.5s cubic-bezier(0, 0.87, 0.12, 1);
-}
-
-.signinGoogle:hover {
-    background-color: var(--white);
-    color: var(--black);
-}
-
-.signinGoogle:active {
-    transform: scale(0.975);
-}
-
-.signinGoogle svg {
-    height: 24px;
-    width: auto;
-    padding-left: 155px;
-}
-
-
 .sign {
     color: var(--background);
     position: absolute;
