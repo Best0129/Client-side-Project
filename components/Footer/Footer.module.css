@@ -102,7 +102,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 0;
   height: 2px;
   background-color: var(--dynamic-orange);
   transform: scaleX(0);
@@ -118,7 +118,6 @@
 .input_box:focus+.underline {
   transform: scaleX(1);
 }
-
 
 .copyright {
   text-align: center;
