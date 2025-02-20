@@ -52,6 +52,7 @@
   font-size: 1.25rem;
   cursor: pointer;
   border: 1px solid var(--light-orange);
+  box-shadow: 5px 10px var(--black);
   z-index: 1;
   position: relative;
   transition: all 250ms;
@@ -94,6 +95,7 @@
   align-items: center;
   gap: 8px;
   border: 1px solid var(--white);
+  box-shadow: 5px 10px var(--black);
   z-index: 1;
   position: relative;
   transition: all 250ms;
