@@ -100,7 +100,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href="/community">
+          <Link href="">
             <FaUsers className={styles.navIcon} /> Community
           </Link>
         </li>
