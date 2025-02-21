@@ -27,6 +27,11 @@
     color: var(--background);
 }
 
+.userContent form {
+  display: flex;
+  flex-direction: column;
+}
+
 .iconProfile {
     border-radius: 50%;
     margin-bottom: 10px;

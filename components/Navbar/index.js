@@ -56,7 +56,7 @@ export default function Navbar() {
 
       // Reload the page after a short delay
       setTimeout(() => {
-        window.location.reload(); // This will refresh the page
+        router.push('/')
       }, 1000); // Adjust the delay as needed (1000 ms = 1 second)
     } else {
       console.error(data.message); // Handle error
