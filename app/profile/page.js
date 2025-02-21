@@ -1,7 +1,7 @@
 "use client";
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
-import styles from './Profile.module.css';
+import styles from './profile.module.css';
 import { useState, useEffect } from 'react';
 
 export default function Profile() {
