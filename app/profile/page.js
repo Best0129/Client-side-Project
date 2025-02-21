@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
-import styles from './profile.module.css';
+import styles from './userprofile.module.css';
 
 export default function Profile() {
     const [username, setUsername] = useState('');
