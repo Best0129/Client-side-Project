@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
-import styles from './profile.module.css';
+import styles from './profile.module.css'
 
 export default function Profile() {
     const [username, setUsername] = useState('');
@@ -13,19 +13,19 @@ export default function Profile() {
     const [errorMessage, setErrorMessage] = useState(''); // State for error message
 
     useEffect(() => {
-        const storedUser  = localStorage.getItem('user');
-        const sessionUser  = sessionStorage.getItem('user');
+        const storedUser = localStorage.getItem('user');
+        const sessionUser = sessionStorage.getItem('user');
 
-        if (storedUser ) {
-            const user = JSON.parse(storedUser );
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
             if (user && user.username) {
                 setUsername(user.username);
                 setEmail(user.email);
                 setNewUsername(user.username);
                 setNewEmail(user.email);
             }
-        } else if (sessionUser ) {
-            const user = JSON.parse(sessionUser );
+        } else if (sessionUser) {
+            const user = JSON.parse(sessionUser);
             if (user && user.username) {
                 setUsername(user.username);
                 setEmail(user.email);
@@ -43,8 +43,14 @@ export default function Profile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Check if both newUsername and newEmail are empty
+        if (!newUsername && !newEmail) {
+            setErrorMessage('Please provide a new username or email to update.');
+            return;
+        }
+
         const response = await fetch('/api/update', {
-            method: 'PUT', // Ensure this is set to 'PUT'
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -57,16 +63,16 @@ export default function Profile() {
         });
 
         if (response.ok) {
-            const updatedUser  = await response.json();
-            setUsername(updatedUser .username);
-            setEmail(updatedUser .email);
+            const updatedUser = await response.json();
+            setUsername(updatedUser.username);
+            setEmail(updatedUser.email);
             setIsEditing(false);
             setErrorMessage(''); // Clear any previous error messages
 
             // Update local storage or session storage
             const userData = {
-                username: updatedUser .username,
-                email: updatedUser .email,
+                username: updatedUser.username,
+                email: updatedUser.email,
             };
 
             // Check if local storage has data
@@ -87,9 +93,7 @@ export default function Profile() {
             } catch {
                 errorData = { error: 'Failed to parse error response' }; // Fallback if parsing fails
             }
-
-            // Set the error message without logging to the console
-            setErrorMessage(errorData.error || 'An unknown error occurred'); // Set the error message
+            setErrorMessage(errorData.error || 'No changes made');
         }
     };
 
@@ -111,25 +115,38 @@ export default function Profile() {
                 </div>
 
                 <div className={styles.userContent}>
-                    {errorMessage && <p className={styles.error}>{errorMessage}</p>} {/* Display error message */}
                     {isEditing ? (
                         <form onSubmit={handleSubmit}>
-                            <input
-                                type="text"
-                                value={newUsername}
-                                onChange={(e) => setNewUsername(e.target.value)}
-                                placeholder="Username"
-                                required
-                            />
-                            <input
-                                type="email"
-                                value={newEmail}
-                                onChange={(e) => setNewEmail(e.target.value)}
-                                placeholder="Email"
-                                required
-                            />
-                            <button type="submit">Save Changes</button>
-                            <button type="button" onClick={() => { setIsEditing(false); setErrorMessage(''); }}>Cancel</button>
+                            {errorMessage &&
+                                <div className={styles.popupOverlay}>
+                                    <div className={styles.popup}>
+                                        <p>
+                                            {errorMessage}</p>
+                                    </div>
+                                </div>}
+                            <div className={styles.inputBox}>
+                                <input
+                                    type="text"
+                                    value={newUsername}
+                                    onChange={(e) => setNewUsername(e.target.value)}
+                                    required
+                                />
+                                <span className={styles.user}>Username</span>
+                            </div>
+
+                            <div className={styles.inputBox}>
+                                <input
+                                    type="email"
+                                    value={newEmail}
+                                    onChange={(e) => setNewEmail(e.target.value)}
+                                    required
+                                />
+                                <span className={styles.user}>Email</span>
+                            </div>
+                            <div className={styles.ctaBtnContainer}>
+                                <button onClick={() => { setIsEditing(false); setErrorMessage(''); }} className={styles.cancelBtn}>Cancel</button>
+                                <button className={styles.confirmBtn}>Confirm</button>
+                            </div>
                         </form>
                     ) : (
                         <>

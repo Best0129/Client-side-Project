@@ -28,31 +28,33 @@ export default function Login() {
       body: JSON.stringify({ email, password }),
     });
 
-    const data = await response.json();
-    
-    if (response.ok) {
-      // Handle successful login (e.g., redirect or show a success message)
-      const userData = { email, username: data.user.username }; // Ensure username is included
-      if (rememberMe) {
-        // Save email and password in localStorage if "Remember Me" is checked
-        localStorage.setItem('user', JSON.stringify(userData));
-      } else {
-        // Save email and password in sessionStorage if "Remember Me" is not checked
-        sessionStorage.setItem('user', JSON.stringify(userData));
-      }
-      router.push('/'); // Redirect to home page
-    } else {
-      setError(data.message); // Set error message from the response
+    // Check if the response is okay
+    if (!response.ok) {
+      const errorData = await response.text(); // Get the response text
+      console.error('Error response:', errorData); // Log the error response
+      setError('Login failed. Please try again.'); // Set a generic error message
+      return; // Exit the function early
     }
+
+    const data = await response.json(); // Now it's safe to parse as JSON
+
+    // Handle successful login
+    const userData = { email, username: data.user.username }; // Ensure username is included
+    if (rememberMe) {
+      localStorage.setItem('user', JSON.stringify(userData));
+    } else {
+      sessionStorage.setItem('user', JSON.stringify(userData));
+    }
+    router.push('/'); // Redirect to home page
   };
 
   // Load email and password from localStorage or sessionStorage
   useEffect(() => {
-    const storedUser  = localStorage.getItem('user');
-    if (storedUser ) {
-      const user = JSON.parse(storedUser );
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
       setEmail(user.email); // Set email from localStorage
-    } 
+    }
   }, []);
 
   return (
@@ -104,9 +106,9 @@ export default function Login() {
 
               <div className={styles.box}>
                 <label className={styles.contain}>
-                  <input 
-                    type="checkbox" 
-                    checked={rememberMe} 
+                  <input
+                    type="checkbox"
+                    checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)} // Update rememberMe state
                   />
                   < svg viewBox="0 0 64 64" height="1em" width="1em">

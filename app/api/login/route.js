@@ -54,14 +54,13 @@ export async function POST(req) {
       user: {
         username: user.username,
         email: user.email,
-        // Add any other fields you want to return
       }
     }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error(error);
+    console.error('Error during login:', error);
     return new Response(JSON.stringify({ message: 'Internal Server Error' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
