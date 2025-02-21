@@ -3,8 +3,6 @@ import Navbar from '@/components/Navbar';
 import { useState, useEffect } from "react";
 import styles from "./workouts.module.css";
 import exercisesData from "@/utils/exercises.json";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import Loader from '@/components/Loader';
 
@@ -15,6 +13,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [exercisesPerPage, setExercisesPerPage] = useState(6);
   const [categoryLoading, setCategoryLoading] = useState(false);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     setExercises(exercisesData);
@@ -67,8 +66,6 @@ export default function Home() {
       setCategoryLoading(false);
     }, 2000);
   };
-
-  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {

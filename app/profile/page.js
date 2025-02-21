@@ -3,14 +3,18 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import styles from './userprofile.module.css';
+import { useRouter } from 'next/navigation';
+import Loader from '@/components/Loader';
 
 export default function Profile() {
+    const router = useRouter();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [newUsername, setNewUsername] = useState('');
     const [newEmail, setNewEmail] = useState('');
     const [errorMessage, setErrorMessage] = useState(''); // State for error message
+    const [loader, setLoader] = useState(true);
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -32,8 +36,10 @@ export default function Profile() {
                 setNewUsername(user.username);
                 setNewEmail(user.email);
             }
+        } else {
+            router.push('/authen/login');
         }
-    }, []);
+    }, [router]);
 
     const handleEditProfile = () => {
         setIsEditing(true);
@@ -97,82 +103,96 @@ export default function Profile() {
         }
     };
 
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setLoader(false);
+      }, 1500);
+  
+      return () => clearTimeout(timer);
+    }, []);
+
     return (
         <main>
-            <Navbar />
-            <div className={styles.container}>
-                <div className={styles.imageContainer}>
-                    <Image
-                        src="/icon.jpg"
-                        alt="Description of the image"
-                        width={175}
-                        height={175}
-                        className={styles.iconProfile}
-                    />
-                    <div className={styles.btnContainer}>
-                        <button>Upload Profile Image</button>
-                    </div>
-                </div>
-
-                <div className={styles.userContent}>
-                    {isEditing ? (
-                        <form onSubmit={handleSubmit}>
-                            {errorMessage &&
-                                <div className={styles.popupOverlay}>
-                                    <div className={styles.popup}>
-                                        <p>
-                                            {errorMessage}</p>
-                                    </div>
-                                </div>}
-                            <div className={styles.inputBox}>
-                                <input
-                                    type="text"
-                                    value={newUsername}
-                                    onChange={(e) => setNewUsername(e.target.value)}
-                                    required
-                                />
-                                <span className={styles.user}>Username</span>
-                            </div>
-
-                            <div className={styles.inputBox}>
-                                <input
-                                    type="email"
-                                    value={newEmail}
-                                    onChange={(e) => setNewEmail(e.target.value)}
-                                    required
-                                />
-                                <span className={styles.user}>Email</span>
-                            </div>
-                            <div className={styles.ctaBtnContainer}>
-                                <button onClick={() => { setIsEditing(false); setErrorMessage(''); }} className={styles.cancelBtn}>Cancel</button>
-                                <button className={styles.confirmBtn}>Confirm</button>
-                            </div>
-                        </form>
-                    ) : (
-                        <>
-                            <h1>{username}</h1>
-                            <p>{email}</p>
+            {loader ? (
+                <Loader />
+            ) : (
+                <>
+                    <Navbar />
+                    <div className={styles.container}>
+                        <div className={styles.imageContainer}>
+                            <Image
+                                src="/icon.jpg"
+                                alt="Description of the image"
+                                width={175}
+                                height={175}
+                                className={styles.iconProfile}
+                            />
                             <div className={styles.btnContainer}>
-                                <button onClick={handleEditProfile}>Edit Profile</button>
-                                <button>Change Password</button>
+                                <button>Upload Profile Image</button>
                             </div>
-                        </>
-                    )}
-                </div>
-            </div>
-            <div className={styles.postContainer}>
-                <h3>Your post</h3>
-                <div className={styles.notification}>
-                    <div className={styles.notiglow}></div>
-                    <div className={styles.notiborderglow}></div>
-                    <div className={styles.notititle}>
-                        <h1>Welcome To Uiverse</h1>
+                        </div>
+
+                        <div className={styles.userContent}>
+                            {isEditing ? (
+                                <form onSubmit={handleSubmit}>
+                                    {errorMessage &&
+                                        <div className={styles.popupOverlay}>
+                                            <div className={styles.popup}>
+                                                <p>
+                                                    {errorMessage}</p>
+                                            </div>
+                                        </div>}
+                                    <div className={styles.inputBox}>
+                                        <input
+                                            type="text"
+                                            value={newUsername}
+                                            onChange={(e) => setNewUsername(e.target.value)}
+                                            required
+                                        />
+                                        <span className={styles.user}>Username</span>
+                                    </div>
+
+                                    <div className={styles.inputBox}>
+                                        <input
+                                            type="email"
+                                            value={newEmail}
+                                            onChange={(e) => setNewEmail(e.target.value)}
+                                            required
+                                        />
+                                        <span className={styles.user}>Email</span>
+                                    </div>
+                                    <div className={styles.ctaBtnContainer}>
+                                        <button onClick={() => { setIsEditing(false); setErrorMessage(''); }} className={styles.cancelBtn}>Cancel</button>
+                                        <button className={styles.confirmBtn}>Confirm</button>
+                                    </div>
+                                </form>
+                            ) : (
+                                <>
+                                    <h1>{username}</h1>
+                                    <p>{email}</p>
+                                    <div className={styles.btnContainer}>
+                                        <button onClick={handleEditProfile}>Edit Profile</button>
+                                        <button>Change Password</button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
                     </div>
-                    <div className={styles.notibody}>
-                        <p>Contribute to Open Source UI Elements</p>
+                    <div className={styles.postContainer}>
+                        <h3>Your post</h3>
+                        <div className={styles.notification}>
+                            <div className={styles.notiglow}></div>
+                            <div className={styles.notiborderglow}></div>
+                            <div className={styles.notititle}>
+                                <h1>Welcome To Uiverse</h1>
+                            </div>
+                            <div className={styles.notibody}>
+                                <p>Contribute to Open Source UI Elements</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </>
+            )}
         </main>
     );
 }
