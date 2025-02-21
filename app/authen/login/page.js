@@ -30,9 +30,8 @@ export default function Login() {
 
     // Check if the response is okay
     if (!response.ok) {
-      const errorData = await response.text(); // Get the response text
-      console.error('Error response:', errorData); // Log the error response
-      setError('Login failed. Please try again.'); // Set a generic error message
+      const errorData = await response.json(); // Parse the response as JSON
+      setError(errorData.message); // Set the error message directly
       return; // Exit the function early
     }
 
@@ -48,7 +47,7 @@ export default function Login() {
     router.push('/'); // Redirect to home page
   };
 
-  // Load email and password from localStorage or sessionStorage
+  // Load email from localStorage
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -94,14 +93,14 @@ export default function Login() {
                   </button>
                 )}
 
-                {error &&
+                {error && (
                   <div className={styles.notification}>
                     <div className={styles.notiglow}></div>
                     <div className={styles.notiborderglow}></div>
                     <div className={styles.notititle}>{error}</div>
                     <div className={styles.notibody}>Please try again.</div>
-                  </div>}
-
+                  </div>
+                )}
               </div>
 
               <div className={styles.box}>
@@ -111,7 +110,7 @@ export default function Login() {
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)} // Update rememberMe state
                   />
-                  < svg viewBox="0 0 64 64" height="1em" width="1em">
+                  <svg viewBox="0 0 64 64" height="1em" width="1em">
                     <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938" className={styles.path}></path>
                   </svg>
                   Remember me

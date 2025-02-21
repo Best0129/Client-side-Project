@@ -1,7 +1,7 @@
 "use client";
 import styles from './Navbar.module.css';
 import Link from 'next/link';
-import { FaDumbbell, FaCalendarAlt, FaUsers, FaUtensils, FaUser , FaUserPlus } from 'react-icons/fa';
+import { FaDumbbell, FaCalendarAlt, FaUsers, FaUtensils, FaUser, FaUserPlus } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -9,9 +9,15 @@ export default function Navbar() {
   const router = useRouter();
   const [username, setUsername] = useState(() => {
     // Initialize username from local storage
-    const storedUser  = localStorage.getItem('user');
-    if (storedUser ) {
-      const user = JSON.parse(storedUser );
+    const storedUser = localStorage.getItem('user');
+    const sessionUser = sessionStorage.getItem('user');
+
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      return user.username || ''; // Return username if it exists
+    }
+    else if (sessionUser) {
+      const user = JSON.parse(sessionUser);
       return user.username || ''; // Return username if it exists
     }
     return ''; // Default to empty string if no user found
@@ -21,9 +27,22 @@ export default function Navbar() {
 
   useEffect(() => {
     const fetchUsername = async () => {
-      const storedUser  = localStorage.getItem('user');
-      if (storedUser ) {
-        const user = JSON.parse(storedUser );
+      const storedUser = localStorage.getItem('user');
+      const sessionUser = sessionStorage.getItem('user');
+      if (storedUser) {
+        const user = JSON.parse(storedUser);
+        if (user && user.email) {
+          const response = await fetch(`/api/getuser?email=${encodeURIComponent(user.email)}`);
+          if (response.ok) {
+            const data = await response.json();
+            setUsername(data.username); // Update username from database
+          } else {
+            console.error('Failed to fetch username:', await response.text());
+          }
+        }
+      }
+      else if (sessionUser) {
+        const user = JSON.parse(sessionUser);
         if (user && user.email) {
           const response = await fetch(`/api/getuser?email=${encodeURIComponent(user.email)}`);
           if (response.ok) {
@@ -57,13 +76,12 @@ export default function Navbar() {
 
     const data = await response.json();
     if (response.ok) {
-      console.log(data.message);
+
+      // Clear user data from localStorage and sessionStorage
       localStorage.removeItem('user');
       sessionStorage.removeItem('user');
       setShowPopup(true);
-      setTimeout(() => {
-        router.push('/');
-      }, 1000);
+      window.location.reload();
     } else {
       console.error(data.message);
     }
@@ -150,11 +168,10 @@ export default function Navbar() {
       {showPopup && (
         <div className={styles.popupOverlay}>
           <div className={styles.popup}>
-            <p>
-              <svg className={styles.succes_svg} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293 a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-              </svg>
-              Logout successful!</p>
+            <svg className={styles.succes_svg} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293 a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+            </svg>
+            <p>Logout successful!</p>
           </div>
         </div>
       )}
