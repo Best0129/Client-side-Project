@@ -93,7 +93,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href="">
+          <Link href="/community">
             <FaUsers className={styles.navIcon} /> Community {/* Icon for Community */}
           </Link>
         </li>

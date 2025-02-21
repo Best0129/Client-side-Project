@@ -55,7 +55,7 @@ export default function Profile() {
                 </div>
             </div>
             <div className={styles.postContainer}>
-                <h1>Your post</h1>
+                <h3>Your post</h3>
                 <div className={styles.notification}>
                     <div className={styles.notiglow}></div>
                     <div className={styles.notiborderglow}></div>
