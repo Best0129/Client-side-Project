@@ -71,13 +71,49 @@ export default function Home() {
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
-
     const timer = setTimeout(() => {
       setLoader(false);
     }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Pagination logic
+  const getPaginationRange = () => {
+    const range = [];
+    const maxPagesToShow = 3;
+
+    // Calculate the start and end page numbers
+    let start = Math.max(1, currentPage - 1);
+    let end = Math.min(totalPages, currentPage + 1);
+
+    // Adjust the start and end if there are less than maxPagesToShow
+    if (totalPages <= maxPagesToShow) {
+      start = 1;
+      end = totalPages;
+    } else {
+      if (currentPage === 1) {
+        end = Math.min(maxPagesToShow, totalPages);
+      } else if (currentPage === totalPages) {
+        start = Math.max(1, totalPages - maxPagesToShow + 1);
+      } else {
+        // If current page is in the middle
+        if (currentPage > 1 && currentPage < totalPages) {
+          start = currentPage - 1;
+          end = currentPage + 1;
+        }
+      }
+    }
+
+    // Fill the range array with page numbers
+    for (let i = start; i <= end; i++) {
+      range.push(i);
+    }
+
+    return range;
+  };
+
+  const paginationRange = getPaginationRange();
 
   return (
     <main>
@@ -133,25 +169,27 @@ export default function Home() {
 
             <div className={styles.pagination}>
               <button
-                className={`${styles.paginationButton} ${currentPage === 1 ? styles.disabled : ""}`}
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
+                className={`${styles.paginationButton} ${currentPage === 1}`}
+                onClick={() => handlePageChange(1)}
               >
-                <FontAwesomeIcon icon={faChevronLeft} className={styles.prevIcon} />
-                Prev
+                First (1)
               </button>
 
-              <p>
-                Page {currentPage} of {totalPages}
-              </p>
+              {paginationRange.map((page) => (
+                <button
+                  key={page}
+                  className={`${styles.paginationButton} ${currentPage === page ? styles.active : ""}`}
+                  onClick={() => handlePageChange(page)}
+                >
+                  {page}
+                </button>
+              ))}
 
               <button
-                className={`${styles.paginationButton} ${currentPage === totalPages ? styles.disabled : ""}`}
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
+                className={`${styles.paginationButton} ${currentPage === totalPages}`}
+                onClick={() => handlePageChange(totalPages)}
               >
-                Next
-                <FontAwesomeIcon icon={faChevronRight} className={styles.nextIcon} />
+                Last ({totalPages})
               </button>
             </div>
           </section>

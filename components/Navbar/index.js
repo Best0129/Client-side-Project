@@ -53,8 +53,7 @@ export default function Navbar() {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
-    window.location.reload();
+    });
 
     const data = await response.json();
     if (response.ok) {

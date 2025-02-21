@@ -145,27 +145,22 @@
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 5px;
-  background-color: var(--dynamic-orange);
+  background-color: transparent;
   color: var(--white);
   cursor: pointer;
   font-weight: 500;
   font-size: 1rem;
-  border: 1px solid var(--black);
+  border: 1px solid var(--dynamic-orange);
   transition: all 0.3s;
   box-shadow: 6px 6px 12px rgb(0, 0, 0), -6px -6px 12px rgba(13, 13, 13);
 }
 
-.paginationButton:not(:disabled):active {
-  color: var(--background);
-  box-shadow: inset 4px 4px 12px rgb(0, 0, 0), inset -4px -4px 12px rgba(13, 13, 13);
+.paginationButton.active, .paginationButton:first-child, .paginationButton:last-child{
+  background-color: var(--dynamic-orange);
 }
 
-.paginationButton:disabled {
-  background-color: var(--light-gray);
-  cursor: not-allowed;
-}
-
-.paginationButton:not(:disabled):hover {
+.paginationButton:hover {
+  background-color: var(--dynamic-orange);
   transform: scale(1.05);
 }
 
