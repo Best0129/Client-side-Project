@@ -14,11 +14,11 @@ export default function Login() {
   const router = useRouter();
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword); // Toggle the visibility state
+    setShowPassword(!showPassword); 
   };
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); 
 
     const response = await fetch('/api/login', {
       method: 'POST',
@@ -30,21 +30,21 @@ export default function Login() {
 
     // Check if the response is okay
     if (!response.ok) {
-      const errorData = await response.json(); // Parse the response as JSON
-      setError(errorData.message); // Set the error message directly
-      return; // Exit the function early
+      const errorData = await response.json(); 
+      setError(errorData.message); 
+      return;
     }
 
-    const data = await response.json(); // Now it's safe to parse as JSON
+    const data = await response.json();
 
     // Handle successful login
-    const userData = { email, username: data.user.username }; // Ensure username is included
+    const userData = { email, username: data.user.username };
     if (rememberMe) {
       localStorage.setItem('user', JSON.stringify(userData));
     } else {
       sessionStorage.setItem('user', JSON.stringify(userData));
     }
-    router.push('/'); // Redirect to home page
+    router.push('/');
   };
 
   // Load email from localStorage
@@ -52,7 +52,7 @@ export default function Login() {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const user = JSON.parse(storedUser);
-      setEmail(user.email); // Set email from localStorage
+      setEmail(user.email); 
     }
   }, []);
 

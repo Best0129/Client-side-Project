@@ -45,9 +45,9 @@ const ExerciseDetail = ({ params }) => {
           <iframe width="1280" height="720" src={embedLinkAutoPlay} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
           <h1>Exercise: {exercise.name}</h1>
           <div className={styles.details}>
-            <p>Description: {exercise.description}</p>
-            <p>Target: <span>{exercise.target}</span></p>
-            <p>Equipment: <span>{exercise.equipment}</span></p>
+            <p><strong>Description:</strong> {exercise.description}</p>
+            <p><strong>Target:</strong> <span>{exercise.target}</span></p>
+            <p><strong>Equipment:</strong> <span>{exercise.equipment}</span></p>
           </div>
         </div>
         <div className={styles.related_content}>
@@ -58,7 +58,7 @@ const ExerciseDetail = ({ params }) => {
                 <a key={relEx.id} href={`/workouts/detail/${relEx.id}`}>
                   <li>
                     <iframe width="400" height="225" src={convertToEmbedLink(relEx.videoUrl)} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-                    <p>Exercise: {relEx.name}</p>
+                    <p><strong>Exercise:</strong> {relEx.name}</p>
                     <hr></hr>
                   </li>
                 </a>

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "downvotePosts" INTEGER[] DEFAULT ARRAY[]::INTEGER[],
+ADD COLUMN     "upvotePosts" INTEGER[] DEFAULT ARRAY[]::INTEGER[];

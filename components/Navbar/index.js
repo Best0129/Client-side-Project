@@ -7,21 +7,7 @@ import { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const router = useRouter();
-  const [username, setUsername] = useState(() => {
-    // Initialize username from local storage
-    const storedUser = localStorage.getItem('user');
-    const sessionUser = sessionStorage.getItem('user');
-
-    if (storedUser) {
-      const user = JSON.parse(storedUser);
-      return user.username || ''; // Return username if it exists
-    }
-    else if (sessionUser) {
-      const user = JSON.parse(sessionUser);
-      return user.username || ''; // Return username if it exists
-    }
-    return ''; // Default to empty string if no user found
-  });
+  const [username, setUsername] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
@@ -35,7 +21,7 @@ export default function Navbar() {
           const response = await fetch(`/api/getuser?email=${encodeURIComponent(user.email)}`);
           if (response.ok) {
             const data = await response.json();
-            setUsername(data.username); // Update username from database
+            setUsername(data.users.username); // Update username from database
           } else {
             console.error('Failed to fetch username:', await response.text());
           }
@@ -47,7 +33,7 @@ export default function Navbar() {
           const response = await fetch(`/api/getuser?email=${encodeURIComponent(user.email)}`);
           if (response.ok) {
             const data = await response.json();
-            setUsername(data.username); // Update username from database
+            setUsername(data.users.username); // Update username from database
           } else {
             console.error('Failed to fetch username:', await response.text());
           }
@@ -77,9 +63,9 @@ export default function Navbar() {
     const data = await response.json();
     if (response.ok) {
 
-      // Clear user data from localStorage and sessionStorage
       localStorage.removeItem('user');
       sessionStorage.removeItem('user');
+
       setShowPopup(true);
       window.location.reload();
     } else {
@@ -117,7 +103,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href="">
+          <Link href="/community">
             <FaUsers className={styles.navIcon} /> Community
           </Link>
         </li>

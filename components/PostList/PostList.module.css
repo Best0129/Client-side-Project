@@ -1,0 +1,142 @@
+.postBox {
+  border-radius: 8px;
+  background-color: rgba(35, 35, 35);
+  box-shadow: 5px 10px var(--black);
+  padding: 15px;
+  display: block;
+  margin-bottom: 25px;
+  transform: translateY(-100px);
+  opacity: 0;
+  animation: landingAnimation 1s forwards;
+}
+
+@keyframes landingAnimation {
+  0% {
+      transform: translateY(100px);
+      opacity: 0;
+  }
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+.userContainer {
+  width: 100%;
+  align-items: center;
+}
+
+.userContainer h4 {
+  color: var(--white);
+}
+
+.iconPostProfile {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user_content {
+  display: flex;
+  flex-direction: row;
+}
+
+.postContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.postContent p {
+  margin-bottom: 5px;
+}
+
+.postContent p>span{
+  margin-left: 10px;
+}
+
+.dateTime {
+  margin-left: 10px;
+  font-size: 0.8rem;
+  color: var(--background);
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttonContainer button {
+  font-family: "Kanit", serif;
+  font-weight: 400;
+  font-style: normal;
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 4px var(--black);
+  background: #e62222;
+}
+
+.buttonContainer button:first-child {
+  margin-right: 20px;
+  background:rgba(13, 13, 13);
+}
+
+.buttonContainer button,
+.buttonContainer button span {
+  transition: 200ms;
+}
+
+.buttonContainer button .text {
+  transform: translateX(15px);
+  color: white;
+  font-weight: bold;
+}
+
+.buttonContainer button .icon {
+  position: absolute;
+  border-left: 1px solid #c41b1b;
+  transform: translateX(70px);
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonContainer button:first-child .icon {
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.buttonContainer button svg {
+  width: 12px;
+  fill: #eee;
+}
+
+.buttonContainer button:hover {
+  background: #ff3636;
+}
+
+.buttonContainer button:first-child:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.buttonContainer button:hover .text {
+  color: transparent;
+}
+
+.buttonContainer button:hover .icon {
+  width: 100px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+.buttonContainer button:focus {
+  outline: none;
+}
+
+.buttonContainer button:active .icon svg {
+  transform: scale(0.8);
+}

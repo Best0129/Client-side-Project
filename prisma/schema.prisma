@@ -8,8 +8,36 @@ generator client {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  email    String @unique
-  password String
+  id              Int     @id @default(autoincrement())
+  username        String  @unique
+  email           String  @unique
+  password        String
+  backgroundColor String? @default("#ffffff")
+  posts           Post[]  @relation("User  Posts")  
+  votes           Vote[]  // Relation to the Vote model
+}
+
+model Post {
+  id          Int      @id @default(autoincrement())
+  title       String
+  content     String  
+  createdAt   DateTime @default(now()) 
+  access      String
+  upVoted     Int      @default(0)
+  downVoted   Int      @default(0) 
+  userId      Int      // Foreign key to User
+  user        User     @relation("User  Posts", fields: [userId], references: [id]) 
+  votes       Vote[]   // Relation to the Vote model
+}
+
+model Vote {
+  id      Int   @id @default(autoincrement())
+  userId  Int
+  postId  Int
+  type    String // 'upvote' or 'downvote'
+  
+  user    User   @relation(fields: [userId], references: [id])
+  post    Post   @relation(fields: [postId], references: [id])
+
+  @@unique([userId, postId]) // Ensure a user can only vote once per post
 }

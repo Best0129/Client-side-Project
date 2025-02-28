@@ -1,0 +1,96 @@
+.postbox {
+  border-radius: 8px;
+  background-color: rgba(35, 35, 35);
+  box-shadow: 5px 10px var(--black);
+  padding: 15px;
+  display: block;
+  margin-bottom: 25px;
+  transform: translateY(-100px);
+  opacity: 0;
+  animation: landingAnimation 1s forwards;
+  transition: 0.3s;
+}
+
+@keyframes landingAnimation {
+  0% {
+      transform: translateY(100px);
+      opacity: 0;
+  }
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+.usercontainer {
+  width: 100%;
+  align-items: center;
+}
+
+.userContainer h4 {
+  color: var(--white);
+}
+
+.iconPostProfile {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user_content {
+  display: flex;
+  flex-direction: row;
+}
+
+.postcontent {
+  display: flex;
+  flex-direction: column;
+}
+
+.postContent p {
+  font-size: 1.1rem;
+}
+
+.dateTime {
+  margin-left: 10px;
+  font-size: 0.8rem;
+  color: var(--background);
+}
+
+.voteContainer {
+  margin-top: 20px;
+}
+
+.voteButton {
+  cursor: pointer;
+  all: unset;
+  margin-right: 10px;
+  font-size: 0.9rem;
+  color: var(--white);
+  padding: 6px 12px;
+  box-shadow: 2px 4px var(--black);
+  background-color: rgba(35, 35, 35);
+  border: 1px solid var(--black);
+  border-radius: 24px;
+  transition: 0.3s;
+}
+
+.voteButton span {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.voteButton:hover {
+  background-color: rgba(13, 13, 13);
+  color: var(--white);
+}
+
+.voteButton:active {
+  transform: scale(0.95);
+}
+
+.active {
+  background-color: rgba(13, 13, 13);
+  color: var(--white);
+  font-weight: bold;
+}
