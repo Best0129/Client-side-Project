@@ -27,7 +27,11 @@ export async function GET(req) {
         },
     });
 
-    return new Response(JSON.stringify({ hasVote: !!vote }), {
+    // Check if the vote exists and return the appropriate response
+    return new Response(JSON.stringify({
+        hasVote: !!vote,
+        voteType: vote ? vote.type : null // Return null if no vote exists
+    }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
     });

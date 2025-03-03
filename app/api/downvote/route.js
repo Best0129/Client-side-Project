@@ -27,23 +27,6 @@ export async function POST(req) {
         }
 
         if (action === 'downvote') {
-            // Check if the user has already downvoted this post
-            const existingVote = await prisma.vote.findUnique({
-                where: {
-                    userId_postId: {
-                        userId: user.id,
-                        postId: postId,
-                    },
-                },
-            });
-
-            if (existingVote) {
-                return new Response(JSON.stringify({ message: 'You have already downvoted this post' }), {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' },
-                });
-            }
-
             // Create a new downvote
             await prisma.vote.create({
                 data: {
@@ -68,24 +51,7 @@ export async function POST(req) {
                 headers: { 'Content-Type': 'application/json' },
             });
         } else if (action === 'removeDownvote') {
-            // Check if the user has downvoted this post
-            const existingVote = await prisma.vote.findUnique({
-                where: {
-                    userId_postId: {
-                        userId: user.id,
-                        postId: postId,
-                    },
-                },
-            });
-
-            if (!existingVote) {
-                return new Response(JSON.stringify({ message: 'You have not downvoted this post' }), {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' },
-                });
-            }
-
-            // Remove the downvote
+            
             await prisma.vote.delete({
                 where: {
                     userId_postId: {
@@ -116,7 +82,7 @@ export async function POST(req) {
             });
         }
     } catch (error) {
-        console.error('Error downvoting post:', error);
+        console.error('Error processing vote:', error);
         return new Response(JSON.stringify({ message: 'Internal Server Error' }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' },

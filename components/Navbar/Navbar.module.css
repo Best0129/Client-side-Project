@@ -296,3 +296,55 @@
   width: 2.5rem;
   height: 2.5rem;
 }
+
+.searchBar {
+  width: 30%;
+  padding: 10px 10px 10px 40px;
+  border: 1px solid var(--background);
+  background-color: rgba(13, 13, 13);
+  color: var(--white);
+  border-radius: 16px;
+  margin: 10px 0;
+}
+
+.suggestions {
+  position: absolute;
+  top: 85%;
+  left: 22%;
+  width: 28%;
+  list-style: none;
+  background-color: rgba(35, 35, 35);
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--background);
+  border-radius: 12px;
+  overflow-y: auto;
+}
+
+.suggestions::-webkit-scrollbar {
+  display: none;
+}
+
+.suggestions li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background-color: rgba(13, 13, 13);
+}
+
+.suggestions a {
+  text-decoration: none;
+  color: var(--white);
+}
+
+.iconSearch {
+  position: absolute;
+  left: 23.5%;
+  color: var(--white);
+}
+
+.icon {
+  margin:0 8px;
+}

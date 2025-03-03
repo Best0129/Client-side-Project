@@ -1,8 +1,17 @@
+"use client"
+import { useState } from 'react'; // Import useState
 import styles from './Footer.module.css';
 import Link from 'next/link';
 import { Phone, Mail } from 'lucide-react';
 
 export default function Footer() {
+  const [email, setEmail] = useState(''); // State for email
+
+  const handleSubscribe = () => {
+    alert(`Thank you for subscribing.`); // Alert the email
+    setEmail(''); // Optionally clear the input after subscribing
+  };
+
   return (
     <section id="Footer" className={styles.footer}>
       <div className={styles.container}>
@@ -32,12 +41,18 @@ export default function Footer() {
         </div>
         <div className={styles.subscribe}>
           <h2>Subscribe More Info</h2>
-          <input className={styles.input_box} type='email' placeholder='Enter your Email'></input>
-          <span className={styles.underline}></span><br></br>
-          <a className={styles.ctaButton} href=''>Subscribe</a>
+          <input
+            className={styles.input_box}
+            type='email'
+            placeholder='Enter your Email'
+            value={email} // Bind the input value to state
+            onChange={(e) => setEmail(e.target.value)} // Update state on change
+          />
+          <span className={styles.underline}></span><br />
+          <button className={styles.ctaButton} onClick={handleSubscribe}>Subscribe</button> {/* Change to button */}
         </div>
       </div>
-      <hr></hr>
+      <hr />
       <div className={styles.copyright}>
         <p>&copy; 2025 GymBuddy. All rights reserved.</p>
       </div>
@@ -46,5 +61,5 @@ export default function Footer() {
         <p className={styles.text}>Back to Top</p>
       </a>
     </section>
-  )
+  );
 }

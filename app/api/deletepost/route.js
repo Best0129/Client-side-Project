@@ -13,12 +13,17 @@ export async function DELETE(req) {
             });
         }
 
+        // Delete all votes associated with the post
+        await prisma.vote.deleteMany({
+            where: { postId: id },
+        });
+
         // Delete the post
         await prisma.post.delete({
             where: { id },
         });
 
-        return new Response(JSON.stringify({ message: 'Post deleted successfully' }), {
+        return new Response(JSON.stringify({ message: 'Post and related votes deleted successfully' }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' },
         });

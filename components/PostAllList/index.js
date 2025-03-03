@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './PostAllList.module.css';
 
-const PostAllList = ({ posts, formatDate, onUpvote, onDownvote, userVote }) => {
-
+export default function PostAllList({ posts, formatDate, onUpvote, onDownvote, userVote }) {
     return (
         <>
             {posts.length > 0 ? (
@@ -50,6 +48,4 @@ const PostAllList = ({ posts, formatDate, onUpvote, onDownvote, userVote }) => {
             )}
         </>
     );
-};
-
-export default PostAllList;
+}

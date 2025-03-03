@@ -1,14 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 import styles from './Recentworkout.module.css';
-import exercisesData from "@/utils/exercises.json"; // Import the JSON file
+import exercisesData from "@/utils/exercises.json";
 
 export default function Recentworkout() {
     const [exercises, setExercises] = useState([]);
 
     useEffect(() => {
-        // Get the last two exercises from the JSON data
-        const latestExercises = exercisesData.slice(-6); // Get the last two exercises
+        // get the last 6 exercises from the JSON data
+        const latestExercises = exercisesData.slice(-6); 
         setExercises(latestExercises);
     }, []);
 

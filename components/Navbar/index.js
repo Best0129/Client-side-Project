@@ -1,15 +1,19 @@
 "use client";
 import styles from './Navbar.module.css';
 import Link from 'next/link';
-import { FaDumbbell, FaCalendarAlt, FaUsers, FaUtensils, FaUser, FaUserPlus } from 'react-icons/fa';
+import { FaDumbbell, FaUsers, FaUtensils, FaUser, FaUserPlus } from 'react-icons/fa';
+import { Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import exercisesData from "@/utils/exercises.json";
 
 export default function Navbar() {
   const router = useRouter();
   const [username, setUsername] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredExercises, setFilteredExercises] = useState([]);
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -43,6 +47,17 @@ export default function Navbar() {
 
     fetchUsername();
   }, []);
+
+  useEffect(() => {
+    if (searchTerm) {
+      const results = exercisesData.filter(exercise =>
+        exercise.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredExercises(results);
+    } else {
+      setFilteredExercises([]);
+    }
+  }, [searchTerm]);
 
   const handleClick = () => {
     if (username) {
@@ -91,15 +106,33 @@ export default function Navbar() {
       <div className={styles.logo}>
         <Link href="/">GymBuddy</Link>
       </div>
+
+      <input
+        type="text"
+        placeholder="Search exercises..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className={styles.searchBar}
+      />
+      <Search size={16} className={styles.iconSearch}></Search>
+
+      {filteredExercises.length > 0 && (
+        <ul className={styles.suggestions}>
+          {filteredExercises.slice(0, 10).map((exercise) => (
+            <Link href={`/workouts/detail/${exercise.id}`} key={exercise.id}>
+              <li>
+                <Search size={16} className={styles.icon}></Search>
+                {exercise.name}
+              </li>
+            </Link>
+          ))}
+        </ul>
+      )}
+
       <ul className={styles.navItems}>
         <li>
           <Link href="/workouts">
             <FaDumbbell className={styles.navIcon} /> Workouts
-          </Link>
-        </li>
-        <li>
-          <Link href="">
-            <FaCalendarAlt className={styles.navIcon} /> Plans
           </Link>
         </li>
         <li>
@@ -108,7 +141,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href="">
+          <Link href="/nutritions">
             <FaUtensils className={styles.navIcon} /> Nutrition
           </Link>
         </li>

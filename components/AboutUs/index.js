@@ -13,7 +13,7 @@ const AboutUs = () => {
           <p className={styles.subtitle}>Welcome to GymBuddy, where we believe that fitness is not just a destination, but a journey towards a healthier, happier you. Founded in 2025, our mission is to empower individuals of all fitness levels to achieve their personal health goals through innovative training programs, expert guidance, and a supportive community.</p>
           <p className={styles.subtitle}>At GymBuddy, we understand that every body is unique. That's why we offer a diverse range of fitness solutions tailored to meet the needs of everyone—from beginners to seasoned athletes. Our state-of-the-art facilities are equipped with the latest fitness technology, and our team of certified trainers is dedicated to providing personalized coaching and motivation to help you stay on track.</p>
           <p className={styles.subtitle}>Whether you're looking to lose weight, build strength, improve your endurance, or simply lead a more active lifestyle, GymBuddy is here to support you every step of the way. Join us today and discover the transformative power of fitness!</p>
-          <button className={styles.btn}> Join Our Community</button>
+          <a href='./community' className={styles.btn}> Join Our Community</a>
         </div>
         <div className={styles.rightSide}>
         </div>

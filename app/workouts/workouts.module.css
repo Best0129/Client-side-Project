@@ -2,7 +2,7 @@
   background: rgba(13, 13, 13);
   background-size: cover;
   background-position: center;
-  height: calc(100dvh - 65.19px);
+  height: calc(100dvh - 77.19px);
 }
 
 .categories {
@@ -11,7 +11,6 @@
   font-style: normal;
   letter-spacing: 2px;
   height: 99%;
-  width: 200px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -19,6 +18,20 @@
   background-color: rgba(20, 20, 20);
   box-shadow: 5px 10px var(--black);
   padding-top: 80px;
+  animation: landing 1s forwards;
+  transition: 0.3s;
+}
+
+@keyframes landing {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  100% {
+    width: 200px;
+    opacity: 1;
+  }
 }
 
 .categories h1 {
@@ -48,20 +61,20 @@
 .categoryButton::after {
   content: '';
   position: absolute;
-  height: 2px; 
-  background: var(--dynamic-orange); 
+  height: 2px;
+  background: var(--dynamic-orange);
   left: 0;
   transition: width 0.4s ease;
 }
 
 .categoryButton::before {
-  top: 0; 
-  width: 0; 
+  top: 0;
+  width: 0;
 }
 
 .categoryButton::after {
-  bottom: 0; 
-  width: 0; 
+  bottom: 0;
+  width: 0;
 }
 
 .categoryButton:hover::before,
@@ -102,12 +115,22 @@
   border-radius: 8px;
   background-color: rgb(35, 35, 35);
   box-shadow: 5px 10px var(--black);
-  transition: 0.4s;
+  transform: translateX(-100px);
+  opacity: 0;
+  animation: landingAnimation 1s forwards;
+  transition: 0.3s;
 }
 
-.exerciseCard:hover {
-  box-shadow: 10px 20px var(--black);
-  transform: translate(-5px, -10px);
+@keyframes landingAnimation {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .exerciseInfo {
@@ -156,7 +179,9 @@
   box-shadow: 6px 6px 12px rgb(0, 0, 0), -6px -6px 12px rgba(13, 13, 13);
 }
 
-.paginationButton.active, .paginationButton:first-child, .paginationButton:last-child{
+.paginationButton.active,
+.paginationButton:first-child,
+.paginationButton:last-child {
   background-color: var(--dynamic-orange);
 }
 

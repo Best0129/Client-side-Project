@@ -20,6 +20,7 @@ export default function Home() {
     setLoading(false);
   }, []);
 
+  // set value of body part
   const bodyParts = [
     "all",
     ...new Set(
@@ -29,25 +30,31 @@ export default function Home() {
     ),
   ];
 
+  // filter exercise by body part
   const filteredExercises = selectedBodyParts.length === 0 || selectedBodyParts.includes("all")
     ? exercises
     : exercises.filter((exercise) =>
       selectedBodyParts.some((part) => exercise.target.includes(part))
     );
 
-  const indexOfLastExercise = currentPage * exercisesPerPage;
-  const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
+
+  const indexOfLastExercise = currentPage * exercisesPerPage; // index of last exercise exercise
+  const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage; // index of first exercise
+  // index of current exercise
   const currentExercises = filteredExercises.slice(
     indexOfFirstExercise,
     indexOfLastExercise
   );
 
+  // set value of total pages
   const totalPages = Math.ceil(filteredExercises.length / exercisesPerPage);
 
+  // function handle page change
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
+  // function handle change category
   const handleCategoryClick = (bodyPart) => {
     setCategoryLoading(true);
     setTimeout(() => {
@@ -75,16 +82,16 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Pagination logic
+  // pagination logic
   const getPaginationRange = () => {
     const range = [];
     const maxPagesToShow = 3;
 
-    // Calculate the start and end page numbers
+    // calculate the start and end page numbers
     let start = Math.max(1, currentPage - 1);
     let end = Math.min(totalPages, currentPage + 1);
 
-    // Adjust the start and end if there are less than maxPagesToShow
+    // adjust the start and end if there are less than maxPagesToShow
     if (totalPages <= maxPagesToShow) {
       start = 1;
       end = totalPages;
@@ -102,7 +109,7 @@ export default function Home() {
       }
     }
 
-    // Fill the range array with page numbers
+    // fill the range array with page numbers
     for (let i = start; i <= end; i++) {
       range.push(i);
     }

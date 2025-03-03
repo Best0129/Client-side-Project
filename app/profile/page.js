@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import PostList from '@/components/PostList';
+import Loader from '@/components/Loader';
 import styles from './userprofile.module.css';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Edit, Lock, ChevronDown, Send, Save } from 'lucide-react';
@@ -12,7 +13,7 @@ export default function Profile() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [view, setView] = useState('profile');
-    const [posts, setPosts] = useState([]); // State to hold user posts
+    const [posts, setPosts] = useState([]);
     const [newUsername, setNewUsername] = useState('');
     const [newEmail, setNewEmail] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -33,7 +34,9 @@ export default function Profile() {
     const [isSortOpen, setIsSortOpen] = useState(false);
     const [visiblePosts, setVisiblePosts] = useState(3);
     const [isLoading, setIsLoading] = useState(false);
+    const [loader, setLoader] = useState(true);
 
+    // function fetch posts of user
     const fetchUserPosts = async () => {
         const storedUser = localStorage.getItem('user');
         const sessionUser = sessionStorage.getItem('user');
@@ -60,6 +63,7 @@ export default function Profile() {
     };
 
     useEffect(() => {
+        // function fetch user data
         const fetchUserData = async () => {
             const storedUser = localStorage.getItem('user');
             const sessionUser = sessionStorage.getItem('user');
@@ -101,29 +105,34 @@ export default function Profile() {
             }
         };
 
-        fetchUserData();
-        fetchUserPosts();
+        fetchUserData(); // recall function fetch user data
+        fetchUserPosts(); // recall function fetch posts of user
     }, [router]);
 
+    // function handle show password
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
+    // function handle edit profile card
     const handleEditProfile = () => {
         setView('edit');
         setErrorMessage('');
         setSuccessMessage('');
     };
 
+    // function handle post title change
     const handlePostTitleChange = (e) => {
         setPostTitle(e.target.value);
     }
 
+    // function handle post content change
     const handlePostTextChange = (e) => {
         setPostText(e.target.value);
         adjustTextAreaHeight();
     };
 
+    // function handle text area height
     const adjustTextAreaHeight = () => {
         if (textAreaRef.current) {
             textAreaRef.current.style.height = 'auto';
@@ -131,6 +140,7 @@ export default function Profile() {
         }
     };
 
+    // function handle create post
     const createPost = async () => {
         if (!postText.trim() || !userId) return;
 
@@ -166,23 +176,27 @@ export default function Profile() {
         }
     };
 
+    // function handle cancle post
     const handleCancelPost = () => {
-        setPostTitle(' ');
-        setPostText('');
-        setPostAccess('Public');
-        setEditingPostId('');
-        adjustTextAreaHeight();
+        setPostTitle(' '); // set post title to empty string
+        setPostText(''); // set post content to empty string
+        setPostAccess('Public'); // set post access to Publuc
+        setEditingPostId(''); // set id of post
+        adjustTextAreaHeight(); // recall function handle text area height
     };
 
+    // function handle dropdown open/close
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
 
+    // function handle post access change
     const handleAccessChange = (access) => {
         setPostAccess(access);
         setIsDropdownOpen(false); // Close dropdown after selection
     };
 
+    // function set icon background color
     const handleColorChange = async (e) => {
         const selectedColor = e.target.value;
         setBgColor(selectedColor);
@@ -207,6 +221,7 @@ export default function Profile() {
         }
     };
 
+    // function handle update user profile
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -260,6 +275,7 @@ export default function Profile() {
         }
     };
 
+    // function handle change password
     const handleChangePassword = async (e) => {
         e.preventDefault();
 
@@ -302,19 +318,16 @@ export default function Profile() {
         }
     };
 
+    // function handle set data of post
     const handleEditPost = (post) => {
         setPostTitle(post.title);
         setPostText(post.content);
         setPostAccess(post.access);
         setEditingPostId(post.id);
         setView('editPost');
-
-        const postContainer = document.getElementById('postContainer');
-        if (postContainer) {
-            postContainer.scrollIntoView({ behavior: 'smooth' });
-        }
     };
 
+    // function handle update post
     const updatePost = async () => {
         if (!postText.trim() || !editingPostId) return;
 
@@ -341,7 +354,6 @@ export default function Profile() {
                 setEditingPostId('');
                 adjustTextAreaHeight();
                 fetchUserPosts();
-                setView('profile');
                 setSuccessMessage(' Edit post successfully!');
             } else {
                 const errorData = await response.json();
@@ -352,14 +364,17 @@ export default function Profile() {
         }
     };
 
+    // function handle post action
     const handlePostAction = () => {
+        // if has editing postId
         if (editingPostId) {
-            updatePost();
+            updatePost(); // recall function update post
         } else {
-            createPost();
+            createPost(); // recall function create post
         }
     };
 
+    // function handle delete post
     const handleDeletePost = async (postId) => {
         const response = await fetch('/api/deletepost', {
             method: 'DELETE',
@@ -377,6 +392,7 @@ export default function Profile() {
         }
     };
 
+    // function change format data of createAt
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const utcOffset = 7 * 60;
@@ -395,19 +411,22 @@ export default function Profile() {
         });
     };
 
+    // function handle sort posts
     const toggleSort = () => {
         setIsSortOpen(!isSortOpen);
     };
 
+    // function handle sort posts
     const handleSortChange = (order) => {
         setSortOrder(order);
         setIsSortOpen(false);
     };
 
+    // function handle view more button
     const handleViewMore = () => {
         setIsLoading(true);
         setTimeout(() => {
-            setVisiblePosts(prevVisiblePosts => prevVisiblePosts + 3);
+            setVisiblePosts(prevVisiblePosts => prevVisiblePosts + 3); // set visible post 
             setIsLoading(false);
         }, 1000);
     };
@@ -415,272 +434,286 @@ export default function Profile() {
     useEffect(() => {
         if (successMessage) {
             const timer = setTimeout(() => {
-                setSuccessMessage(''); 
-            }, 3000); 
+                setSuccessMessage('');
+            }, 3000);
 
-            return () => clearTimeout(timer); 
+            return () => clearTimeout(timer);
         }
     }, [successMessage]);
 
     const postCount = posts.length;
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoader(false);
+        }, 1500);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <main>
-            <Navbar />
-            <div className={styles.container}>
-                <div className={styles.imageContainer}>
-                    <div className={styles.imageWrapper} onClick={() => document.getElementById('colorPicker').click()}>
-                        <Image
-                            src="/icon.webp"
-                            alt="Description of the image"
-                            width={175}
-                            height={175}
-                            style={{ backgroundColor: bgColor }}
-                            className={styles.iconProfile}
-                        />
-                        <input
-                            type="color"
-                            id="colorPicker"
-                            style={{ display: 'none' }}
-                            onChange={handleColorChange}
-                        />
-                        <Edit className={styles.editIcon} />
-                    </div>
-                </div>
-
-                {successMessage &&
-                    <div className={styles.popupSuccessOverlay}>
-                        <div className={styles.popupSuccess}>
-                            <svg className={styles.succes_svg} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293 a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                            </svg>
-                            <p>{successMessage}</p>
+            {loader ? (
+                <Loader />
+            ) : (
+                <>
+                    <Navbar />
+                    <div className={styles.container}>
+                        <div className={styles.imageContainer}>
+                            <div className={styles.imageWrapper} onClick={() => document.getElementById('colorPicker').click()}>
+                                <Image
+                                    src="/icon.webp"
+                                    alt="Description of the image"
+                                    width={175}
+                                    height={175}
+                                    style={{ backgroundColor: bgColor }}
+                                    className={styles.iconProfile}
+                                />
+                                <input
+                                    type="color"
+                                    id="colorPicker"
+                                    style={{ display: 'none' }}
+                                    onChange={handleColorChange}
+                                />
+                                <Edit className={styles.editIcon} />
+                            </div>
                         </div>
-                    </div>}
 
-                <div className={styles.userContent}>
-                    {view === 'edit' ? (
-                        <form onSubmit={handleSubmit}>
-                            <h1 className={styles.header}><Edit className={styles.icon} />Edit Profile</h1>
-                            {errorMessage &&
-                                <div className={styles.popupOverlay}>
-                                    <div className={styles.popup}>
-                                        <p>{errorMessage}</p>
-                                    </div>
-                                </div>}
-                            <div className={styles.inputBox}>
-                                <input
-                                    type="text"
-                                    value={newUsername}
-                                    onChange={(e) => setNewUsername(e.target.value)}
-                                    required
-                                />
-                                <span className={styles.user}>Username</span>
-                            </div>
-
-                            <div className={styles.inputBox}>
-                                <input
-                                    type="email"
-                                    value={newEmail}
-                                    onChange={(e) => setNewEmail(e.target.value)}
-                                    required
-                                />
-                                <span className={styles.user}>Email</span>
-                            </div>
-                            <div className={styles.ctaBtnContainer}>
-                                <button onClick={() => { setView('profile'); setErrorMessage(''); }} className={styles.cancelBtn}>Cancel</button>
-                                <button className={styles.confirmBtn}>Confirm</button>
-                            </div>
-                        </form>
-                    ) : view === 'changePassword' ? (
-                        <form onSubmit={handleChangePassword}>
-                            <h1 className={styles.header}><Lock className={styles.icon} />Change Password</h1>
-                            {passwordError &&
-                                <div className={styles.popupOverlay}>
-                                    <div className={styles.popup}>
-                                        <p>{passwordError}</p>
-                                    </div>
-                                </div>}
-                            {successMessage &&
-                                <div className={styles.popupOverlay}>
-                                    <div className={styles.popup}>
-                                        <p>{successMessage}</p>
-                                    </div>
-                                </div>}
-                            <div className={styles.inputBox}>
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    value={newPassword}
-                                    onChange={(e) => setNewPassword(e.target.value)}
-                                    required
-                                    placeholder="New Password"
-                                />
-                                {newPassword && (
-                                    <button
-                                        type="button"
-                                        onClick={togglePasswordVisibility}
-                                        className={styles.viewPasswordButton}
-                                    >
-                                        {showPassword ? <EyeOff /> : <Eye />}
-                                    </button>
-                                )}
-                            </div>
-                            <div className={styles.inputBox}>
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                    required
-                                    placeholder="Confirm New Password"
-                                />
-                                {confirmPassword && (
-                                    <button
-                                        type="button"
-                                        onClick={togglePasswordVisibility}
-                                        className={styles.viewPasswordButton}
-                                    >
-                                        {showPassword ? <EyeOff /> : <Eye />}
-                                    </button>
-                                )}
-                            </div>
-                            <div className={styles.ctaBtnContainer}>
-                                <button type="button" onClick={() => setView('profile')} className={styles.cancelBtn}>Cancel</button>
-                                <button type="submit" className={styles.confirmBtn}>Confirm</button>
-                            </div>
-                        </form>
-                    ) : (
-                        <>
-                            <h1 className={styles.name}>{username}</h1>
-                            <h3>{email}</h3>
-                            <div className={styles.btnContainer}>
-                                <button onClick={handleEditProfile} className={styles.editButton}>
-                                    <Edit className={styles.icon} size={14} />Edit Profile
-                                </button>
-                                <button onClick={() => setView('changePassword')} className={styles.changePasswordButton}>
-                                    <Lock className={styles.icon} size={14} />Change Password
-                                </button>
-                            </div>
-                        </>
-                    )}
-                </div>
-            </div>
-
-            <div className={styles.postContainer} id='postContainer'>
-                <h2>Post</h2>
-                <div className={styles.postbox}>
-                    <div className={styles.userPost}>
-                        <div className={styles.profile}>
-                            <Image
-                                src="/icon.webp"
-                                alt="Description of the image"
-                                width={32}
-                                height={32}
-                                style={{ backgroundColor: bgColor }}
-                                className={styles.iconprofile}
-                            />
-                            <h4>{username}</h4>
-                        </div>
-                        <div className={styles.customDropdown} onClick={toggleDropdown}>
-                            <p>Access: </p>
-                            <span>{postAccess}</span>
-                            <ChevronDown className={styles.dropdownIcon} />
-                            {isDropdownOpen && (
-                                <div className={styles.dropdownMenu}>
-                                    <div className={styles.dropdownItem} onClick={() => handleAccessChange('Public')}>
-                                        Public
-                                    </div>
-                                    <div className={styles.dropdownItem} onClick={() => handleAccessChange('Private')}>
-                                        Private
-                                    </div>
+                        {successMessage &&
+                            <div className={styles.popupSuccessOverlay}>
+                                <div className={styles.popupSuccess}>
+                                    <svg className={styles.succes_svg} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293 a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                                    </svg>
+                                    <p>{successMessage}</p>
                                 </div>
-                            )}
-                        </div>
-                    </div>
-                    <input
-                        className={styles.postTitle}
-                        type='text'
-                        placeholder="What's your topic?"
-                        value={postTitle}
-                        onChange={handlePostTitleChange}
-                    />
-                    <textarea
-                        ref={textAreaRef}
-                        className={styles.postText}
-                        placeholder={`What are you thinking? ${username}`}
-                        value={postText}
-                        onChange={handlePostTextChange}
-                    ></textarea>
-                    <div className={styles.btncontainer}>
-                        <button
-                            className={styles.cancelbtn}
-                            onClick={handleCancelPost}>
-                            Cancel</button>
-                        <button
-                            className={styles.postbtn}
-                            disabled={!postText.trim()}
-                            onClick={handlePostAction}
-                        >
-                            {editingPostId ? (
-                                <>
-                                    <Save className={styles.icon} />
-                                    Save
-                                </>
+                            </div>}
+
+                        <div className={styles.userContent}>
+                            {view === 'edit' ? (
+                                <form onSubmit={handleSubmit}>
+                                    <h1 className={styles.header}><Edit className={styles.icon} />Edit Profile</h1>
+                                    {errorMessage &&
+                                        <div className={styles.popupOverlay}>
+                                            <div className={styles.popup}>
+                                                <p>{errorMessage}</p>
+                                            </div>
+                                        </div>}
+                                    <div className={styles.inputBox}>
+                                        <input
+                                            type="text"
+                                            value={newUsername}
+                                            onChange={(e) => setNewUsername(e.target.value)}
+                                            required
+                                        />
+                                        <span className={styles.user}>Username</span>
+                                    </div>
+
+                                    <div className={styles.inputBox}>
+                                        <input
+                                            type="email"
+                                            value={newEmail}
+                                            onChange={(e) => setNewEmail(e.target.value)}
+                                            required
+                                        />
+                                        <span className={styles.user}>Email</span>
+                                    </div>
+                                    <div className={styles.ctaBtnContainer}>
+                                        <button onClick={() => { setView('profile'); setErrorMessage(''); }} className={styles.cancelBtn}>Cancel</button>
+                                        <button className={styles.confirmBtn}>Confirm</button>
+                                    </div>
+                                </form>
+                            ) : view === 'changePassword' ? (
+                                <form onSubmit={handleChangePassword}>
+                                    <h1 className={styles.header}><Lock className={styles.icon} />Change Password</h1>
+                                    {passwordError &&
+                                        <div className={styles.popupOverlay}>
+                                            <div className={styles.popup}>
+                                                <p>{passwordError}</p>
+                                            </div>
+                                        </div>}
+                                    {successMessage &&
+                                        <div className={styles.popupOverlay}>
+                                            <div className={styles.popup}>
+                                                <p>{successMessage}</p>
+                                            </div>
+                                        </div>}
+                                    <div className={styles.inputBox}>
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            value={newPassword}
+                                            onChange={(e) => setNewPassword(e.target.value)}
+                                            required
+                                            placeholder="New Password"
+                                        />
+                                        {newPassword && (
+                                            <button
+                                                type="button"
+                                                onClick={togglePasswordVisibility}
+                                                className={styles.viewPasswordButton}
+                                            >
+                                                {showPassword ? <EyeOff /> : <Eye />}
+                                            </button>
+                                        )}
+                                    </div>
+                                    <div className={styles.inputBox}>
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            value={confirmPassword}
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                            required
+                                            placeholder="Confirm New Password"
+                                        />
+                                        {confirmPassword && (
+                                            <button
+                                                type="button"
+                                                onClick={togglePasswordVisibility}
+                                                className={styles.viewPasswordButton}
+                                            >
+                                                {showPassword ? <EyeOff /> : <Eye />}
+                                            </button>
+                                        )}
+                                    </div>
+                                    <div className={styles.ctaBtnContainer}>
+                                        <button type="button" onClick={() => setView('profile')} className={styles.cancelBtn}>Cancel</button>
+                                        <button type="submit" className={styles.confirmBtn}>Confirm</button>
+                                    </div>
+                                </form>
                             ) : (
                                 <>
-                                    <Send className={styles.icon} />
-                                    Post
+                                    <h1 className={styles.name}>{username}</h1>
+                                    <h3>{email}</h3>
+                                    <div className={styles.btnContainer}>
+                                        <button onClick={handleEditProfile} className={styles.editButton}>
+                                            <Edit className={styles.icon} size={14} />Edit Profile
+                                        </button>
+                                        <button onClick={() => setView('changePassword')} className={styles.changePasswordButton}>
+                                            <Lock className={styles.icon} size={14} />Change Password
+                                        </button>
+                                    </div>
                                 </>
                             )}
-                        </button>
+                        </div>
                     </div>
-                </div>
 
-                <hr className={styles.sectionSep}></hr>
-
-                <div className={styles.sortContainer}>
-                    <h2>Published Posts <span>#Total posts: {postCount}</span></h2>
-                    <div className={styles.customdropdown} onClick={toggleSort}>
-                        <p>Sort by:</p>
-                        <span>{sortOrder}</span>
-                        <ChevronDown className={styles.dropdownIcon} />
-                        {isSortOpen && (
-                            <div className={styles.dropdownmenu}>
-                                <div className={styles.dropdownitem} onClick={() => handleSortChange('Newest')}>
-                                    Newest
+                    <div className={styles.postContainer} id='postContainer'>
+                        <h2>Post</h2>
+                        <div className={styles.postbox}>
+                            <div className={styles.userPost}>
+                                <div className={styles.profile}>
+                                    <Image
+                                        src="/icon.webp"
+                                        alt="Description of the image"
+                                        width={32}
+                                        height={32}
+                                        style={{ backgroundColor: bgColor }}
+                                        className={styles.iconprofile}
+                                    />
+                                    <h4>{username}</h4>
                                 </div>
-                                <div className={styles.dropdownitem} onClick={() => handleSortChange('Latest')}>
-                                    Latest
+                                <div className={styles.customDropdown} onClick={toggleDropdown}>
+                                    <p>Access: </p>
+                                    <span>{postAccess}</span>
+                                    <ChevronDown className={styles.dropdownIcon} />
+                                    {isDropdownOpen && (
+                                        <div className={styles.dropdownMenu}>
+                                            <div className={styles.dropdownItem} onClick={() => handleAccessChange('Public')}>
+                                                Public
+                                            </div>
+                                            <div className={styles.dropdownItem} onClick={() => handleAccessChange('Private')}>
+                                                Private
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
+                            <input
+                                className={styles.postTitle}
+                                type='text'
+                                placeholder="What's your topic?"
+                                value={postTitle}
+                                onChange={handlePostTitleChange}
+                            />
+                            <textarea
+                                ref={textAreaRef}
+                                className={styles.postText}
+                                placeholder={`What are you thinking? ${username}`}
+                                value={postText}
+                                onChange={handlePostTextChange}
+                            ></textarea>
+                            <div className={styles.btncontainer}>
+                                <button
+                                    className={styles.cancelbtn}
+                                    onClick={handleCancelPost}>
+                                    Cancel</button>
+                                <button
+                                    className={styles.postbtn}
+                                    disabled={!postText.trim()}
+                                    onClick={handlePostAction}
+                                >
+                                    {editingPostId ? (
+                                        <>
+                                            <Save className={styles.icon} />
+                                            Save
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Send className={styles.icon} />
+                                            Post
+                                        </>
+                                    )}
+                                </button>
+                            </div>
+                        </div>
+
+                        <hr className={styles.sectionSep}></hr>
+
+                        <div className={styles.sortContainer}>
+                            <h2>Published Posts <span>#Total posts: {postCount}</span></h2>
+                            <div className={styles.customdropdown} onClick={toggleSort}>
+                                <p>Sort by:</p>
+                                <span>{sortOrder}</span>
+                                <ChevronDown className={styles.dropdownIcon} />
+                                {isSortOpen && (
+                                    <div className={styles.dropdownmenu}>
+                                        <div className={styles.dropdownitem} onClick={() => handleSortChange('Newest')}>
+                                            Newest
+                                        </div>
+                                        <div className={styles.dropdownitem} onClick={() => handleSortChange('Latest')}>
+                                            Latest
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className={styles.postList}>
+                            <PostList
+                                posts={sortPosts(posts.slice(0, visiblePosts))}
+                                formatDate={formatDate}
+                                username={username}
+                                bgColor={bgColor}
+                                onEdit={handleEditPost}
+                                onDelete={handleDeletePost}
+                            />
+                        </div>
+
+                        {isLoading &&
+                            <div className={styles.loader}>
+                                Loading ...
+                            </div>
+                        }
+
+                        {!isLoading && visiblePosts < posts.length && (
+                            <button className={styles.viewmoreBtn} onClick={handleViewMore} >
+                                <span className={styles.box}>
+                                    View more
+                                </span>
+                            </button>
                         )}
                     </div>
-                </div>
-
-                <div className={styles.postList}>
-                    <PostList
-                        posts={sortPosts(posts.slice(0, visiblePosts))}
-                        formatDate={formatDate}
-                        username={username}
-                        bgColor={bgColor}
-                        onEdit={handleEditPost}
-                        onDelete={handleDeletePost}
-                    />
-                </div>
-
-                {isLoading &&
-                    <div className={styles.loader}>
-                        Loading ...
-                    </div>
-                }
-
-                {!isLoading && visiblePosts < posts.length && (
-                    <button className={styles.viewmoreBtn} onClick={handleViewMore} >
-                        <span className={styles.box}>
-                            View more
-                        </span>
-                    </button>
-                )}
-            </div>
+                </>
+            )}
         </main>
     );
 }

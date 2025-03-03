@@ -7,17 +7,20 @@ import { useRouter } from 'next/navigation';
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState('');
-  const [username, setUsername] = useState(''); // State for username
-  const [email, setEmail] = useState(''); // State for email
-  const [error, setError] = useState(''); // State for error messages
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState(''); 
+  const [error, setError] = useState('');
   const router = useRouter();
 
+  // function handle show password
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  // function handle register
   const handleRegister = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    // Prevent default form submission
+    e.preventDefault(); 
 
     const response = await fetch('/api/register', {
       method: 'POST',
@@ -28,12 +31,11 @@ export default function Register() {
     });
 
     if (response.ok) {
-      // Handle successful registration (e.g., redirect or show a success message)
       console.log('User registered successfully');
       router.push('/authen/login'); // Redirect to login page
     } else {
       const data = await response.json();
-      setError(data.message); // Set error message from the response
+      setError(data.message); 
     }
   };
 
@@ -52,7 +54,7 @@ export default function Register() {
                   type="text"
                   required
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)} // Update username state
+                  onChange={(e) => setUsername(e.target.value)}
                 />
                 <span className={styles.user}>Username</span>
               </div>
@@ -62,7 +64,7 @@ export default function Register() {
                   type="email"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)} // Update email state
+                  onChange={(e) => setEmail(e.target.value)} 
                 />
                 <span className={styles.user}>Email</span>
               </div>

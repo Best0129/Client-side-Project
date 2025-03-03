@@ -4,16 +4,17 @@ import * as React from 'react';
 import Navbar from '@/components/Navbar';
 
 const ExerciseDetail = ({ params }) => {
-  const { id } = React.use(params); // Get the id from the URL parameters
+  const { id } = React.use(params); // get the id from the URL parameters
 
-  // Find the exercise based on the id
+  // find the exercise based on the id
   const exercise = exercisesData.find(ex => ex.id.toString() === id);
 
-  // Handle case where exercise is not found
+  // handle case where exercise is not found
   if (!exercise) {
     return <div>Exercise not found</div>; 
   }
 
+  // function change URL to embed URL
   function convertToEmbedLink(youtubeUrl) {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
     const match = youtubeUrl.match(regex);
@@ -30,7 +31,7 @@ const ExerciseDetail = ({ params }) => {
   const autoPlay = "?autoplay=1"
   const embedLinkAutoPlay = embedLink.concat(autoPlay)
 
-  // Function to get related exercises based on the target
+  // function to get related exercises based on the target
   const getRelatedExercises = (target) => {
     return exercisesData.filter(ex => ex.target === target && ex.id.toString() !== id);
   };
@@ -73,7 +74,7 @@ const ExerciseDetail = ({ params }) => {
   );
 };
 
-// This function generates the static paths for the dynamic routes
+// function generates the static paths for the dynamic routes
 export async function generateStaticParams() {
   const paths = exercisesData.map(exercise => ({
     id: exercise.id.toString(),

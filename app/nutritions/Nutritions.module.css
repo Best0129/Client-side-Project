@@ -1,0 +1,133 @@
+body {
+    background-color: rgba(13, 13, 13);
+    font-family: "Kanit", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba(35, 35, 35);
+    color: var(--white);
+    box-shadow: 8px 16px rgba(0, 0, 0);
+    transform: translateX(-100px);
+    opacity: 0;
+    animation: landingAnimation 1s forwards;
+    transition: 0.3s;
+  }
+  
+  @keyframes landingAnimation {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+  }
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.inputWithIcon {
+    display: flex;
+    align-items: center;
+}
+
+.formGroup input,
+.formGroup select {
+    all: unset;
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: rgba(13, 13, 13);
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+    border: 1px solid var(--white);
+}
+
+.formGroup select {
+    width: 96.5%;
+    padding: 8px;
+}
+
+.formGroup input::-webkit-outer-spin-button,
+.formGroup input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.radioGroup {
+    display: flex;
+    column-gap: 10px;
+}
+
+.radioGroup label {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+}
+
+.radioGroup label>input {
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.radioGroup label>input:checked {
+    background-color: var(--white);
+}
+
+.radioGroup label>input:hover {
+    background-color: var(--background);
+}
+
+.btnContainer {
+    display: flex;
+    column-gap: 20px;
+}
+
+.calcBtn {
+    padding: 10px 15px;
+    background-color: #0070f3;
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.clearBtn {
+    padding: 10px 15px;
+    background-color: var(--white);
+    color: var(--black);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.calcBtn:hover {
+    background-color: #005bb5;
+}
+
+.clearBtn:hover {
+    background-color: var(--background);
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+}

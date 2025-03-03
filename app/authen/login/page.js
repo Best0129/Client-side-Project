@@ -5,18 +5,19 @@ import { Eye, EyeOff } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
-  const [email, setEmail] = useState(''); // State for email
-  const [password, setPassword] = useState(''); // State to manage password input
-  const [error, setError] = useState(''); // State for error messages
-  const [rememberMe, setRememberMe] = useState(false); // State for "Remember Me" checkbox
-
+  const [showPassword, setShowPassword] = useState(false); 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState(''); 
+  const [error, setError] = useState(''); 
+  const [rememberMe, setRememberMe] = useState(false); 
   const router = useRouter();
 
+  // function handle show password
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword); 
   };
 
+  // function handle login
   const handleLogin = async (e) => {
     e.preventDefault(); 
 
@@ -28,7 +29,7 @@ export default function Login() {
       body: JSON.stringify({ email, password }),
     });
 
-    // Check if the response is okay
+
     if (!response.ok) {
       const errorData = await response.json(); 
       setError(errorData.message); 
@@ -37,7 +38,6 @@ export default function Login() {
 
     const data = await response.json();
 
-    // Handle successful login
     const userData = { email, username: data.user.username };
     if (rememberMe) {
       localStorage.setItem('user', JSON.stringify(userData));
@@ -47,7 +47,7 @@ export default function Login() {
     router.push('/');
   };
 
-  // Load email from localStorage
+  // store user data in localstorage
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -70,24 +70,24 @@ export default function Login() {
                   type="email"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)} // Update email state
+                  onChange={(e) => setEmail(e.target.value)} 
                 />
                 <span className={styles.user}>Email</span>
               </div>
 
               <div className={styles.inputBox}>
                 <input
-                  type={showPassword ? "text" : "password"} // Change input type based on state
+                  type={showPassword ? "text" : "password"} 
                   required
-                  value={password} // Bind the input value to the state
-                  onChange={(e) => setPassword(e.target.value)} // Update state on input change
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)} 
                 />
                 <span>Password</span>
-                {password && ( // Conditionally render the button if password is not empty
+                {password && ( 
                   <button
                     type="button"
                     onClick={togglePasswordVisibility}
-                    className={styles.viewPasswordButton} // Add a class for styling
+                    className={styles.viewPasswordButton} 
                   >
                     {showPassword ? <EyeOff /> : <Eye />}
                   </button>
@@ -108,14 +108,13 @@ export default function Login() {
                   <input
                     type="checkbox"
                     checked={rememberMe}
-                    onChange={(e) => setRememberMe(e.target.checked)} // Update rememberMe state
+                    onChange={(e) => setRememberMe(e.target.checked)} 
                   />
                   <svg viewBox="0 0 64 64" height="1em" width="1em">
                     <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938" className={styles.path}></path>
                   </svg>
                   Remember me
                 </label>
-                <a>Forgot Your Password</a>
               </div>
 
               <button type="submit" className={styles.enter}>Sign in</button>

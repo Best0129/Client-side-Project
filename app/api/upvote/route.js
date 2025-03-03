@@ -27,24 +27,7 @@ export async function POST(req) {
         }
 
         if (action === 'upvote') {
-            // Check if the user has already upvoted this post
-            const existingVote = await prisma.vote.findUnique({
-                where: {
-                    userId_postId: {
-                        userId: user.id,
-                        postId: postId,
-                    },
-                },
-            });
 
-            if (existingVote) {
-                return new Response(JSON.stringify({ message: 'You have already upvoted this post' }), {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' },
-                });
-            }
-
-            // Create a new upvote
             await prisma.vote.create({
                 data: {
                     userId: user.id,
@@ -68,24 +51,7 @@ export async function POST(req) {
                 headers: { 'Content-Type': 'application/json' },
             });
         } else if (action === 'removeUpvote') {
-            // Check if the user has upvoted this post
-            const existingVote = await prisma.vote.findUnique({
-                where: {
-                    userId_postId: {
-                        userId: user.id,
-                        postId: postId,
-                    },
-                },
-            });
 
-            if (!existingVote) {
-                return new Response(JSON.stringify({ message: 'You have not upvoted this post' }), {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' },
-                });
-            }
-
-            // Remove the upvote
             await prisma.vote.delete({
                 where: {
                     userId_postId: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./Workouts.module.css"; // Ensure this import matches your CSS module file
+import styles from "./Workouts.module.css";
 import { Dumbbell, Bike, Heart, BicepsFlexed, Weight, Timer } from 'lucide-react';
 
 export default function Workouts() {
