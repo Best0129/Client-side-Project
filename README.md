@@ -2,6 +2,12 @@
 
 นี่คือแอปพลิเคชัน Next.js สำหรับหน้า Landing Page ด้านฟิตเนสชื่อ "GymBuddy" ซึ่งรวมถึงฟีเจอร์ต่าง ๆ เช่น แผนการออกกำลังกาย การมีส่วนร่วมของชุมชน และข้อมูลโภชนาการ
 
+## เทคโนโลยีที่ใช้
+### Frame work
+- Next.js (Fullstack) เป็น JavaScripts
+### Database
+- Neon PostgresSQL ใช้คู่กับ Prisma
+
 ## Prerequisites
 
 ก่อนที่คุณจะเริ่ม โปรดตรวจสอบให้แน่ใจว่าคุณได้ทำตามข้อกำหนดต่อไปนี้:
@@ -36,10 +42,12 @@
     ```
     yarn add --dev @eslint/eslintrc @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-next typescript
    ```
+   ***หมายเหตุ สามารถ npm i ได้เลย***
 
 3. **ตั้งค่า Prisma:**
  
-    สร้าง folder ที่มี package ของ prisma
+   
+    สร้าง folder ที่มี package ของ prisma หากยังไม่มี
     ```
     npx prisma init
     ```
@@ -52,7 +60,7 @@
     npx prisma generate
     ```
 
-4. **รันเซิร์ฟเวอร์** 
+5. **รันเซิร์ฟเวอร์** 
     
     ใช้ npm
     ```
@@ -63,7 +71,7 @@
    yarn dev
    ```
 
-5. **เปิดเบราว์เซอร์**
+6. **เปิดเบราว์เซอร์**
 ไปที่ http://localhost:3000
 
 ## API ที่ใช้ใน โปรเจคนี้
