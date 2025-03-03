@@ -38,11 +38,11 @@
    ```
 
 3. **ตั้งค่า Prisma:**
-    
+    สร้าง folder ที่มี package ของ prisma
     ```
     npx prisma init
     ```
-
+    migrate ตาราง
     ```
     npx prisma migrate dev --name <migration-name>
     ```
