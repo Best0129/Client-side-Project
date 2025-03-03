@@ -23,41 +23,71 @@
 2. **Install dependencies**
 
     ใช้ npm
-    ```bash
-    // Dependencies อื่นๆ
+    ```
     npm install @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome @prisma/client bcryptjs formidable lucide-react next@15.1.4 prisma react@19.0.0 react-dom@19.0.0 react-icons
-        
-    // Dependencies ของ Next.js
+    ```
+    ```
     npm install --save-dev @eslint/eslintrc @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-next typescript
     ```
    ใช้ yarn 
-    ```bash
-   // Dependencies อื่นๆ
+    ```
     yarn add @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome @prisma/client bcryptjs formidable lucide-react next@15.1.4 prisma react@19.0.0 react-dom@19.0.0 react-icons
-    
-    // Dependencies ของ Next.js
+    ```
+    ```
     yarn add --dev @eslint/eslintrc @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-next typescript
    ```
 
 3. **ตั้งค่า Prisma:**
+    
+    ```
+    npx prisma init
+    ```
+
+    ```
+    npx prisma migrate dev --name <migration-name>
+    ```
     รันคำสั่งต่อไปนี้เพื่อสร้าง Prisma client
-    ```bash
+    ```
     npx prisma generate
     ```
 
 4. **รันเซิร์ฟเวอร์** 
     
     ใช้ npm
-    ```bash
+    ```
     npm run dev
     ```
    ใช้ yarn 
-    ```bash
+    ```
    yarn dev
    ```
 
 5. **เปิดเบราว์เซอร์**
 ไปที่ http://localhost:3000
+
+## API ที่ใช้ใน โปรเจคนี้
+
+### Method Get
+- checkVote api
+- getAllPost api
+- getUser api
+- getUserPsots api
+- getUserVotes api
+
+### Method Post
+- changePassword api
+- upVote api
+- downVote api
+- login api
+- logout api
+- register api
+- updateProfile api
+- updateIconBackgroundColor api
+- createPost api
+- updatePost api
+
+### Method Delete
+- deletePost api
 
 ## Refferences
 - [Next.js](https://nextjs.org)
