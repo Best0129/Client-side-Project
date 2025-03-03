@@ -160,8 +160,12 @@ export default function NutritionCalculator() {
                             </button>
                         </div>
                         {calories !== null && (
-                            <div className={styles.result}>
-                                <h2>Your daily calories needs: {calories} calories</h2>
+                            <div className={styles.notification}>
+                                <div className={styles.notiglow}></div>
+                                <div className={styles.notiborderglow}></div>
+                                <div className={styles.notibody}>
+                                    <h2>Your daily calories needs: {calories} calories</h2>
+                                </div>
                             </div>
                         )}
                     </div>

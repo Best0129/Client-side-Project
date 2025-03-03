@@ -34,9 +34,8 @@ export default function Footer() {
           <h2>Quick Links</h2>
           <ul>
             <li><Link href="./workouts">Workouts</Link></li>
-            <li><Link href="">Plans</Link></li>
-            <li><Link href="">Community</Link></li>
-            <li><Link href="">Nutrition</Link></li>
+            <li><Link href="./community">Community</Link></li>
+            <li><Link href="./nutritions">Nutrition</Link></li>
           </ul>
         </div>
         <div className={styles.subscribe}>
