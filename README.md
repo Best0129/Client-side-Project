@@ -45,6 +45,7 @@
    ***หมายเหตุ สามารถ npm i ได้เลย***
 
 3. **ตั้งค่า Prisma:**
+   
     สร้าง folder ที่มี package ของ prisma หากยังไม่มี
     ```
     npx prisma init
