@@ -38,10 +38,6 @@
     // Dependencies ของ Next.js
     yarn add --dev @eslint/eslintrc @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-next typescript
    ```
-   หรือ install requirement.txt 
-    ```bash
-    pip install -r requirements.txt
-   ```
 
 3. **ตั้งค่า Prisma:**
     รันคำสั่งต่อไปนี้เพื่อสร้าง Prisma client
