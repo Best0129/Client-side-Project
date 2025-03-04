@@ -1,9 +1,14 @@
+.nutritionContainer {
+    background-color: rgba(13, 13, 13);
+    height: 100dvh;
+}
+
 .container {
     font-family: "Kanit", serif;
     font-weight: 400;
     font-style: normal;
     max-width: 600px;
-    margin: 50px auto;
+    margin: 100px auto;
     padding: 20px;
     border-radius: 8px;
     background-color: rgba(35, 35, 35);
@@ -139,7 +144,22 @@
     border-radius: 5px;
     font-size: 0.9rem;
     overflow: hidden;
-}
+    transform: translateX(-100px);
+    opacity: 0;
+    animation: landingAnimation 1s forwards;
+    transition: 0.3s;
+  }
+  
+  @keyframes landingAnimation {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+  }
 
 .notification:before {
     position: absolute;

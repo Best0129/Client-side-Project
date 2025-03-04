@@ -1,11 +1,8 @@
-body {
-  background-color: rgba(13, 13, 13);
-}
-
 .communityContainer {
   font-family: "Kanit", serif;
   font-weight: 400;
   font-style: normal;
+  background-color: rgba(13, 13, 13);
 }
 
 .container {
@@ -229,9 +226,10 @@ body {
 
 .postList {
   display: block;
-  margin: 30px auto;
+  margin: 0 auto;
   width: 80%;
   color: var(--white);
+  padding-bottom: 20px;
 }
 
 .loader {

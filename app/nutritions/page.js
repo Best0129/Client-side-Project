@@ -63,7 +63,7 @@ export default function NutritionCalculator() {
     }, []);
 
     return (
-        <main>
+        <main className={styles.nutritionContainer}>
             {loader ? (
                 <Loader />
             ) : (
