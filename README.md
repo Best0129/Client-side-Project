@@ -42,7 +42,7 @@
     ```
     yarn add --dev @eslint/eslintrc @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-next typescript
    ```
-   ***หมายเหตุ สามารถ npm i ได้เลย***
+   ***หมายเหตุ สามารถ `npm i` ได้เลย***
 
 3. **ตั้งค่า Prisma:**
  
