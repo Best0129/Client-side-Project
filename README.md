@@ -42,7 +42,7 @@
     ```
     yarn add --dev @eslint/eslintrc @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-next typescript
    ```
-   ***หมายเหตุ สามารถ npm i ได้เลย***
+   ***หมายเหตุ สามารถ `npm i` ได้เลย***
 
 3. **ตั้งค่า Prisma:**
  
@@ -84,19 +84,21 @@
 - getUserVotes api
 
 ### Method Post
-- changePassword api
 - upVote api
 - downVote api
 - login api
 - logout api
 - register api
-- updateProfile api
-- updateIconBackgroundColor api
 - createPost api
-- updatePost api
 
 ### Method Delete
 - deletePost api
+
+### Method Put
+- changePassword api
+- updateProfile api
+- updateIconBackgroundColor api
+- updatePost api 
 
 ## Refferences
 - [Next.js](https://nextjs.org)
