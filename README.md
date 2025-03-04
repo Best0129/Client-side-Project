@@ -95,7 +95,7 @@
 - deletePost api
 
 ### Method Put
--changePassword api
+- changePassword api
 - updateProfile api
 - updateIconBackgroundColor api
 - updatePost api 
