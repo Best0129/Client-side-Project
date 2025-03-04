@@ -1,11 +1,7 @@
-body {
-    background-color: rgba(13, 13, 13);
+.container {
     font-family: "Kanit", serif;
     font-weight: 400;
     font-style: normal;
-}
-
-.container {
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;

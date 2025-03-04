@@ -1,11 +1,7 @@
-body {
-    background-color: rgba(13, 13, 13);
-    font-family: "Kanit", serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
 .container {
+  font-family: "Kanit", serif;
+  font-weight: 400;
+  font-style: normal;
   display: flex;
   background-color: rgba(13, 13, 13);
   color: var(--white);
