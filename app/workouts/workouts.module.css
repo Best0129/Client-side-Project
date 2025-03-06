@@ -15,23 +15,10 @@
   z-index: 1;
   top: 0;
   left: 0;
+  width: 200px;
   background-color: rgba(20, 20, 20);
   box-shadow: 5px 10px var(--black);
   padding-top: 80px;
-  animation: landing 1s forwards;
-  transition: 0.3s;
-}
-
-@keyframes landing {
-  0% {
-    width: 0;
-    opacity: 0;
-  }
-
-  100% {
-    width: 200px;
-    opacity: 1;
-  }
 }
 
 .categories h1 {

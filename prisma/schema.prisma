@@ -41,3 +41,11 @@ model Vote {
 
   @@unique([userId, postId]) // Ensure a user can only vote once per post
 }
+
+model Exercise {
+  id          Int     @id @default(autoincrement())
+  like        Int     @default(0)
+  dislike     Int     @default(0)
+  userId      Int     // Foreign key to User
+  user        User     @relation("User  Exercises", fields: [userId], references: [id])
+}
