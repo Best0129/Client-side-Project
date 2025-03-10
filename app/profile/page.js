@@ -261,7 +261,6 @@ export default function Profile() {
             } else {
                 sessionStorage.setItem('user', JSON.stringify(userData));
             }
-            window.location.reload();
         } else {
             const errorText = await response.text();
             let errorData;
@@ -553,12 +552,7 @@ export default function Profile() {
                                                 <p>{passwordError}</p>
                                             </div>
                                         </div>}
-                                    {successMessage &&
-                                        <div className={styles.popupOverlay}>
-                                            <div className={styles.popup}>
-                                                <p>{successMessage}</p>
-                                            </div>
-                                        </div>}
+                                        
                                     <div className={styles.inputBox}>
                                         <input
                                             type={showPassword ? "text" : "password"}
