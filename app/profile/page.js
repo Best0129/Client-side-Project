@@ -278,12 +278,12 @@ export default function Profile() {
     // function handle change password
     const handleChangePassword = async (e) => {
         e.preventDefault();
-
+    
         if (newPassword !== confirmPassword) {
             setPasswordError('Passwords do not match.');
             return;
         }
-
+    
         const response = await fetch('/api/changepassword', {
             method: 'PUT',
             headers: {
@@ -294,13 +294,30 @@ export default function Profile() {
                 newPassword,
             }),
         });
-
+    
         if (response.ok) {
             const data = await response.json();
             setNewPassword('');
             setConfirmPassword('');
             setPasswordError('');
             setSuccessMessage('Change password successfully!');
+    
+            // Call the logout API after a successful password change
+            const logoutResponse = await fetch('/api/logout', {
+                method: 'POST', // Assuming logout is a POST request
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (logoutResponse.ok) {
+                // Optionally handle successful logout here
+                console.log('Logged out successfully');
+            } else {
+                // Handle logout error if needed
+                console.error('Failed to log out after password change');
+            }
+    
             setTimeout(() => {
                 setSuccessMessage('');
             }, 1000);
@@ -308,7 +325,7 @@ export default function Profile() {
         } else {
             const errorText = await response.text();
             let errorData;
-
+    
             try {
                 errorData = JSON.parse(errorText);
             } catch {
@@ -317,7 +334,6 @@ export default function Profile() {
             setPasswordError(errorData.error || 'Failed to change password');
         }
     };
-
     // function handle set data of post
     const handleEditPost = (post) => {
         setPostTitle(post.title);
